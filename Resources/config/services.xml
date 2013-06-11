@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="oauth2.server" class="OAuth2\Server">
+            <argument type="service" id="oauth2.storage.memory" />
+        </service>
+
+        <service
+            id="oauth2.request"
+            class="OAuth2\HttpFoundationBridge\Request"
+            factory-class="OAuth2\HttpFoundationBridge\Request"
+            factory-method="createFromRequest"
+            scope="request"
+        >
+            <argument type="service" id="request" />
+        </service>
+        <service id="oauth2.response" class="OAuth2\HttpFoundationBridge\Response" />
+        <service id="oauth2.storage.memory" class="OAuth2\Storage\Memory" />
+    </services>
+</container>
