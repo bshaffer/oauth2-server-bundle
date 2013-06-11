@@ -11,9 +11,8 @@
             "email": "bshafs@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.2",
+        "php": ">=5.3.0",
         "bshaffer/oauth2-server-php": "dev-develop",
         "bshaffer/oauth2-server-httpfoundation-bridge": "dev-develop"
     },
