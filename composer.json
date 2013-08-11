@@ -1,5 +1,5 @@
 {
-    "name": "bshaffer/oauth2-server-bundle",
+    "name": "jdelaune/oauth2-server-bundle",
     "type": "symfony-bundle",
     "description": "Symfony OAuth2ServerBundle",
     "keywords": ["oauth", "oauth2", "security"],
