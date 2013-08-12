@@ -3,8 +3,6 @@
 namespace OAuth2\ServerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-// this imports the "@Route" annotation
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class TokenController extends Controller
@@ -19,13 +17,9 @@ class TokenController extends Controller
      */
     public function tokenAction()
     {
-        // get the oauth server (@see OAuth2/ServerBundle/Resources/config/services.xml)
-        $server = $this->get('oauth2.server');
+        $server = $this->get('c4.oauth2.server');
+        $server->addGrantType($this->get('c4.oauth2.grant_type.client_credentials'));
 
-        // get the oauth response object (@see OAuth2/ServerBundle/Resources/config/services.xml)
-        $response = $this->get('oauth2.response');
-
-        // let the oauth2-server-php library do all the work!
-        return $server->handleTokenRequest($this->get('oauth2.request'), $response);
+        return $server->handleTokenRequest($this->get('oauth2.request'), $this->get('oauth2.response'));
     }
 }

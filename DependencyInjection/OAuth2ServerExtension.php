@@ -11,12 +11,10 @@ class OAuth2ServerExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
-    }
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
 
-    public function getAlias()
-    {
-        return 'o_auth2_server';
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
     }
 }
