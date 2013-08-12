@@ -63,7 +63,7 @@ You'll need to add the following to your routing.yml
 # app/config/routing.yml
 
 oauth2_server:
-    resource: "@OAuth2/ServerBundle/Controller/"
+    resource: "@OAuth2ServerBundle/Controller/"
     type:     annotation
     prefix:   /
 ```
