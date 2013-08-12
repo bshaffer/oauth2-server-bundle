@@ -18,6 +18,8 @@ services:
         factory_class: %oauth2.request_factory.class%
         factory_method: createFromRequest
         scope: request
+        arguments:
+            request: @request
     oauth2.response:
         class: %oauth2.response.class%
     oauth2.storage.client_credentials:

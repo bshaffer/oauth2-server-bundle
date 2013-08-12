@@ -73,7 +73,7 @@ class AccessToken implements AccessTokenInterface
         if (!$client) return NULL;
 
         // Create Access Token
-        $accessToken = new \C4\OAuth2ServerBundle\Entity\AccessToken();
+        $accessToken = new \OAuth2\ServerBundle\Entity\AccessToken();
         $accessToken->setToken($oauth_token);
         $accessToken->setClient($client);
         $accessToken->setUserId($user_id);
