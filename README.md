@@ -6,6 +6,8 @@ OAuth2 Server Bundle for Symfony 2.
 
 Currently only supports the Client Credentials grant type. More to follow.
 
+You can make token requests to the `/token` path via POST.
+
 ## Installation
 
 ### Step 1: Add package to Composer
@@ -51,6 +53,19 @@ You'll need to update your schema to setup the Entities provided by this module.
 
 ``` bash
 $ php app/console doctrine:schema:update --force
+```
+
+### Step 4: Add routes
+
+You'll need to add the following to your routing.yml
+
+``` yaml
+# app/config/routing.yml
+
+oauth2_server:
+    resource: "@OAuth2ServerBundle/Controller/"
+    type:     annotation
+    prefix:   /
 ```
 
 ## Optional Configuration
