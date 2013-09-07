@@ -1,0 +1,16 @@
+OAuth2\ServerBundle\Entity\Client:
+    type: entity
+    table: oauth_client
+    id:
+        client_id:
+            type:       string
+            length:     50
+    fields:
+        client_secret:
+            type:       string
+            length:     40
+        redirect_uri:
+            type:       string
+            length:     255
+            default:    ""
+    lifecycleCallbacks: {  }
