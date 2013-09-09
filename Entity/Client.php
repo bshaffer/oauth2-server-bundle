@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Client
 {
-
     /**
      * @var string
      */
@@ -21,9 +20,14 @@ class Client
     private $client_secret;
 
     /**
-     * @var string
+     * @var array
      */
     private $redirect_uri;
+
+    /**
+     * @var array
+     */
+    private $grant_types;
 
 
     /**
@@ -75,23 +79,51 @@ class Client
     /**
      * Set redirect_uri
      *
-     * @param string $redirectUri
+     * @param string|array $redirectUri
      * @return Client
      */
     public function setRedirectUri($redirectUri)
     {
-        $this->redirect_uri = $redirectUri;
-    
+        if (is_array($redirectUri)) {
+            $this->redirect_uri = $redirectUri;
+        }
+        else {
+            $this->redirect_uri = array($redirectUri);
+        }
+
         return $this;
     }
 
     /**
      * Get redirect_uri
      *
-     * @return string 
+     * @return array 
      */
     public function getRedirectUri()
     {
         return $this->redirect_uri;
+    }
+
+    /**
+     * Set grant_types
+     *
+     * @param array $grantTypes
+     * @return Client
+     */
+    public function setGrantTypes($grantTypes)
+    {
+        $this->grant_types = $grantTypes;
+    
+        return $this;
+    }
+
+    /**
+     * Get grant_types
+     *
+     * @return array 
+     */
+    public function getGrantTypes()
+    {
+        return $this->grant_types;
     }
 }
