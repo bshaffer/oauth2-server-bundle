@@ -22,11 +22,7 @@ class AuthorizeController extends Controller
             return $server->getResponse();
         }
 
-
-        return array('request' => $this->get('oauth2.request')->query->all());
-        //$response = $server->handleAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'));
-
-        //var_dump($response);        
+        return array('request' => $this->get('oauth2.request')->query->all());  
     }
 
     /**
