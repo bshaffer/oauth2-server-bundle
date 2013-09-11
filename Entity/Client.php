@@ -121,4 +121,32 @@ class Client
     {
         return $this->grant_types;
     }
+    /**
+     * @var array
+     */
+    private $scopes;
+
+
+    /**
+     * Set scopes
+     *
+     * @param array $scopes
+     * @return Client
+     */
+    public function setScopes($scopes)
+    {
+        $this->scopes = $scopes;
+    
+        return $this;
+    }
+
+    /**
+     * Get scopes
+     *
+     * @return array 
+     */
+    public function getScopes()
+    {
+        return $this->scopes;
+    }
 }
