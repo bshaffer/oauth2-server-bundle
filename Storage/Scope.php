@@ -62,4 +62,21 @@ class Scope implements ScopeInterface
     {
         return FALSE;
     }
+
+    /**
+     * Gets the description of a given scope key, if
+     * available, otherwise the key is returned.
+     *
+     * @return
+     * string description of the scope key.
+     */
+    public function getDescriptionForScope($scope)
+    {
+        // Get Scope
+        $scopeObject = $this->em->getRepository('OAuth2ServerBundle:Scope')->find($scope);
+
+        if (!$scopeObject) return $scope;
+
+        return $scopeObject->getDescription();
+    }
 }

@@ -17,6 +17,7 @@
         <parameter key="oauth2.grant_type.user_credentials.class">OAuth2\GrantType\UserCredentials</parameter>
         <parameter key="oauth2.user_provider.class">OAuth2\ServerBundle\User\OAuth2UserProvider</parameter>
         <parameter key="oauth2.client_manager.class">OAuth2\ServerBundle\Manager\ClientManager</parameter>
+        <parameter key="oauth2.scope_manager.class">OAuth2\ServerBundle\Manager\ScopeManager</parameter>
     </parameters>
     <services>
         <service id="oauth2.server" class="%oauth2.server.class%">
@@ -73,6 +74,9 @@
             </argument>
         </service>
         <service id="oauth2.client_manager" class="%oauth2.client_manager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="oauth2.scope_manager" class="%oauth2.scope_manager.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
     </services>

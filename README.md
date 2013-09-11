@@ -87,7 +87,15 @@ oauth2_server:
     prefix:   /
 ```
 
-### Step 5: Create a client
+### Step 5: Create a scope
+
+You'll need to setup a scope before you can create a client, use this command. The description you give here will appear on the Authorization page.
+
+```sh
+$ php app/console OAuth2:CreateScope scope (description)
+```
+
+### Step 6: Create a client
 
 Use this console command to create a new client:
 

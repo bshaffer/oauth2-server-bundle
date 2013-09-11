@@ -1,10 +1,16 @@
 <h1>Authorize</h1>
 
+{% if scopes|length > 0 %}
 <p>{{ request.client_id }} would like to access the following data:</p>
 
 <ul>
-    <li>Get me from scope</li>
+    {% for scope in scopes %}
+    <li>{{ scope }}</li>
+    {% endfor %}
 </ul>
+{% else %}
+<p>{{ request.client_id }} would like to access.</p>
+{% endif %}
 
 <form action="?response_type={{ request.response_type }}&amp;client_id={{ request.client_id }}&amp;redirect_uri={{ request.redirect_uri }}&amp;state={{ request.state }}" method="post">
     <input type="hidden" name="authorize" value="1" />

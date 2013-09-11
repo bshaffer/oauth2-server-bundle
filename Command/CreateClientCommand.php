@@ -40,6 +40,11 @@ class CreateClientCommand extends ContainerAwareCommand
             $output->writeln('<fg=red>Unable to create client ' . $input->getArgument('identifier') . '</fg=red>');
             return;
         }
+        catch(\OAuth2\ServerBundle\Exception\ScopeNotFoundException $e)
+        {
+            $output->writeln('<fg=red>Scope not found, please create it first</fg=red>');
+            return;
+        }
 
         $output->writeln('<fg=green>Client ' . $input->getArgument('identifier') . ' created with secret ' . $client->getClientSecret() . '</fg=green>');
     }

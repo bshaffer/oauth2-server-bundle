@@ -3,6 +3,7 @@
 namespace OAuth2\ServerBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
+use OAuth2\ServerBundle\Exception\ScopeNotFoundException;
 
 class ClientManager
 {
@@ -33,6 +34,14 @@ class ClientManager
         $client->setClientSecret($this->generateSecret());
         $client->setRedirectUri($redirect_uris);
         $client->setGrantTypes($grant_types);
+
+        // Verify scopes
+        foreach ($scopes as $scope) {
+            // Get Scope
+            $scopeObject = $this->em->getRepository('OAuth2ServerBundle:Scope')->find($scope);
+            if (!$scopeObject) throw new ScopeNotFoundException();
+        }
+
         $client->setScopes($scopes);
 
         // Store Client
