@@ -4,9 +4,29 @@ OAuth2 Server Bundle for Symfony 2.
 
 ## Overview
 
-Currently only supports the Client Credentials grant type. More to follow.
+The following grant types are supported out the box:
+
+- Client Credentials
+- Authorization Code
+- Refresh Token
 
 You can make token requests to the `/token` path via POST.
+
+You can restrict the grant types available per client, or in your own TokenController you could do something like:
+
+``` php
+public function tokenAction()
+{
+    $server = $this->get('oauth2.server');
+
+    // Override default grant types to authorization code only
+    $server->addGrantType($this->get('oauth2.grant_type.authorization_code'));
+
+    return $server->handleTokenRequest($this->get('oauth2.request'), $this->get('oauth2.response'));
+}
+```
+
+Some grant types allow for further configuration, like the refresh token. To take advantage of this you'll need you a CompilerPass to redefine the service definition.
 
 ## Installation
 
