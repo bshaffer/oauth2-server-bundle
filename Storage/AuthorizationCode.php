@@ -52,7 +52,7 @@ class AuthorizationCode implements AuthorizationCodeInterface
             'client_id' => $code->getClient()->getClientId(),
             'user_id' => $code->getUserId(),
             'expires' => $code->getExpires()->getTimestamp(),
-            'redirect_uri' => implode(',', $code->getRedirectUri()),
+            'redirect_uri' => implode(' ', $code->getRedirectUri()),
             'scope' => $code->getScope()
         );
     }

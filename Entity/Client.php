@@ -84,7 +84,7 @@ class Client
      */
     public function setRedirectUri($redirectUri)
     {
-        $this->redirect_uri = explode(',', $redirectUri);
+        $this->redirect_uri = explode(' ', $redirectUri);
 
         return $this;
     }
