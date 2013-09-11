@@ -77,16 +77,10 @@ class ClientCredentials implements ClientCredentialsInterface
 
         if (!$client) return FALSE;
 
-        // Normalize entity into array
-        // $encoders = array();
-        // $normalizers = array(new GetSetMethodNormalizer());
-        //$serializer = new Serializer($normalizers, $encoders);
-        // return $serializer->normalize($client);
-
         return array(
-            'redirect_uri' => $client->getRedirectUri(),
-            'client_id' => $client->getClientId()
-        //    'grant_types' => array()
+            'redirect_uri' => implode(' ', $client->getRedirectUri()),
+            'client_id' => $client->getClientId(),
+            'grant_types' => $client->getGrantTypes()
         );
     }
 
@@ -109,7 +103,14 @@ class ClientCredentials implements ClientCredentialsInterface
      */
     public function checkRestrictedGrantType($client_id, $grant_type)
     {
-        // TODO Add support for different grant types
-        return TRUE;
+        $client = $this->getClientDetails($client_id);
+
+        if (!$client) return FALSE;
+
+        if (empty($client['grant_types'])) return TRUE;
+
+        if (in_array($grant_type, $client['grant_types'])) return TRUE;
+
+        return FALSE;
     }
 }

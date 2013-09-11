@@ -1,17 +1,18 @@
-OAuth2\ServerBundle\Entity\Client:
+OAuth2\ServerBundle\Entity\User:
     type: entity
-    table: oauth_client
+    table: oauth_user
     id:
-        client_id:
+        username:
             type:       string
-            length:     50
+            length:     255
     fields:
-        client_secret:
+        password:
             type:       string
-            length:     40
-        redirect_uri:
-            type:       simple_array
-        grant_types:
+            length:     255
+        salt:
+            type:       string
+            length:     255
+        roles:
             type:       simple_array
             nullable:   true
         scopes:
