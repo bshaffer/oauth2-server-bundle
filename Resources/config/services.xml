@@ -38,6 +38,8 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
         <service id="oauth2.storage.authorization_code" class="%oauth2.storage.authorization_code.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
         <service id="oauth2.storage.user_credentials" class="%oauth2.storage.user_credentials.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="oauth2.user_provider"/>
@@ -54,8 +56,10 @@
         </service>
         <service id="oauth2.grant_type.authorization_code" class="%oauth2.grant_type.authorization_code.class%">
             <argument type="service" id="oauth2.storage.authorization_code"/>
+        </service>
         <service id="oauth2.grant_type.user_credentials" class="%oauth2.grant_type.user_credentials.class%">
             <argument type="service" id="oauth2.storage.user_credentials"/>
+        </service>
         <service id="oauth2.grant_type.refresh_token" class="%oauth2.grant_type.refresh_token.class%">
             <argument type="service" id="oauth2.storage.refresh_token"/>
         </service>
