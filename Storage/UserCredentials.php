@@ -5,6 +5,7 @@ namespace OAuth2\ServerBundle\Storage;
 use OAuth2\Storage\UserCredentialsInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use OAuth2\ServerBundle\OAuth2UserInterface;
 use OAuth2\ServerBundle\AdvancedOAuth2UserInterface;
@@ -54,6 +55,14 @@ class UserCredentials implements UserCredentialsInterface
         catch (\Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e)
         {
             return FALSE;
+        }
+
+        // Do extra checks if implementing the AdvancedUserInterface
+        if ($user instanceof AdvancedUserInterface) {
+            if ($user->isAccountNonExpired() === FALSE) return FALSE;
+            if ($user->isAccountNonLocked() === FALSE) return FALSE;
+            if ($user->isCredentialsNonExpired() === FALSE) return FALSE;
+            if ($user->isEnabled() === FALSE) return FALSE;
         }
 
         // Check password
