@@ -79,12 +79,12 @@ class Client
     /**
      * Set redirect_uri
      *
-     * @param string $redirectUri
+     * @param array $redirectUri
      * @return Client
      */
     public function setRedirectUri($redirectUri)
     {
-        $this->redirect_uri = explode(' ', $redirectUri);
+        $this->redirect_uri = $redirectUri;
 
         return $this;
     }

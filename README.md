@@ -87,6 +87,14 @@ oauth2_server:
     prefix:   /
 ```
 
+### Step 5: Create a client
+
+Use this console command to create a new client:
+
+```sh
+$ php app/console OAuth2:CreateClient client_id redirect_uri (grant_types) (scope)
+```
+
 ## Optional Configuration
 
 You can override any of the built-in components in your own bundle by adding new parameters in your config.yml:
