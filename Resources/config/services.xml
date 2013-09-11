@@ -7,8 +7,12 @@
         <parameter key="oauth2.response.class">OAuth2\HttpFoundationBridge\Response</parameter>
         <parameter key="oauth2.storage.client_credentials.class">OAuth2\ServerBundle\Storage\ClientCredentials</parameter>
         <parameter key="oauth2.storage.access_token.class">OAuth2\ServerBundle\Storage\AccessToken</parameter>
+        <parameter key="oauth2.storage.authorization_code.class">OAuth2\ServerBundle\Storage\AuthorizationCode</parameter>
         <parameter key="oauth2.storage.user_credentials.class">OAuth2\ServerBundle\Storage\UserCredentials</parameter>
+        <parameter key="oauth2.storage.refresh_token.class">OAuth2\ServerBundle\Storage\RefreshToken</parameter>
         <parameter key="oauth2.grant_type.client_credentials.class">OAuth2\GrantType\ClientCredentials</parameter>
+        <parameter key="oauth2.grant_type.authorization_code.class">OAuth2\GrantType\AuthorizationCode</parameter>
+        <parameter key="oauth2.grant_type.refresh_token.class">OAuth2\GrantType\RefreshToken</parameter>
         <parameter key="oauth2.grant_type.user_credentials.class">OAuth2\GrantType\UserCredentials</parameter>
         <parameter key="oauth2.user_provider.class">OAuth2\ServerBundle\User\OAuth2UserProvider</parameter>
     </parameters>
@@ -17,7 +21,9 @@
             <argument key="storage" type="collection">
                 <argument type="service" id="oauth2.storage.client_credentials" />
                 <argument type="service" id="oauth2.storage.access_token" />
+                <argument type="service" id="oauth2.storage.authorization_code" />
                 <argument type="service" id="oauth2.storage.user_credentials" />
+                <argument type="service" id="oauth2.storage.refresh_token" />
             </argument>
         </service>
         <service id="oauth2.request" class="%oauth2.request.class%" factory-class="OAuth2\HttpFoundationBridge\Request" factory-method="createFromRequest" scope="request">
@@ -31,6 +37,9 @@
         <service id="oauth2.storage.client_credentials" class="%oauth2.storage.client_credentials.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
+        <service id="oauth2.storage.authorization_code" class="%oauth2.storage.authorization_code.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
         <service id="oauth2.storage.user_credentials" class="%oauth2.storage.user_credentials.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="oauth2.user_provider"/>
@@ -39,11 +48,20 @@
         <service id="oauth2.storage.access_token" class="%oauth2.storage.access_token.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
+        <service id="oauth2.storage.refresh_token" class="%oauth2.storage.refresh_token.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
         <service id="oauth2.grant_type.client_credentials" class="%oauth2.grant_type.client_credentials.class%">
             <argument type="service" id="oauth2.storage.client_credentials"/>
         </service>
+        <service id="oauth2.grant_type.authorization_code" class="%oauth2.grant_type.authorization_code.class%">
+            <argument type="service" id="oauth2.storage.authorization_code"/>
+        </service>
         <service id="oauth2.grant_type.user_credentials" class="%oauth2.grant_type.user_credentials.class%">
             <argument type="service" id="oauth2.storage.user_credentials"/>
+        </service>
+        <service id="oauth2.grant_type.refresh_token" class="%oauth2.grant_type.refresh_token.class%">
+            <argument type="service" id="oauth2.storage.refresh_token"/>
         </service>
     </services>
 </container>
