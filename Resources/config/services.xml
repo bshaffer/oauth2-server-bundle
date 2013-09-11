@@ -11,6 +11,7 @@
         <parameter key="oauth2.storage.refresh_token.class">OAuth2\ServerBundle\Storage\RefreshToken</parameter>
         <parameter key="oauth2.grant_type.client_credentials.class">OAuth2\GrantType\ClientCredentials</parameter>
         <parameter key="oauth2.grant_type.authorization_code.class">OAuth2\GrantType\AuthorizationCode</parameter>
+        <parameter key="oauth2.grant_type.refresh_token.class">OAuth2\GrantType\RefreshToken</parameter>
     </parameters>
     <services>
         <service id="oauth2.server" class="%oauth2.server.class%">
@@ -42,6 +43,8 @@
         </service>
         <service id="oauth2.grant_type.authorization_code" class="%oauth2.grant_type.authorization_code.class%">
             <argument type="service" id="oauth2.storage.authorization_code"/>
+        <service id="oauth2.grant_type.refresh_token" class="%oauth2.grant_type.refresh_token.class%">
+            <argument type="service" id="oauth2.storage.refresh_token"/>
         </service>
     </services>
 </container>
