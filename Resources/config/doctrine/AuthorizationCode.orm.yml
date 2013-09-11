@@ -11,6 +11,7 @@ OAuth2\ServerBundle\Entity\AuthorizationCode:
         user_id:
             type:       string
             length:     100
+            nullable:   true
         redirect_uri:
             type:       simple_array
         scope:

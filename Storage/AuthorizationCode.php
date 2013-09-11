@@ -4,10 +4,9 @@ namespace OAuth2\ServerBundle\Storage;
 
 use OAuth2\Storage\AuthorizationCodeInterface;
 use Doctrine\ORM\EntityManager;
-use OAuth2\ServerBundle\Entity\AuthorizationCode;
 use OAuth2\ServerBundle\Entity\Client;
 
-class ClientCredentials implements AuthorizationCodeInterface
+class AuthorizationCode implements AuthorizationCodeInterface
 {
     private $em;
 
@@ -51,8 +50,8 @@ class ClientCredentials implements AuthorizationCodeInterface
 
         return array(
             'client_id' => $code->getClient()->getClientId(),
-            'user_id' => $code->getExpires()->getTimestamp(),
-            'expires' => $code->getGrantTypes(),
+            'user_id' => $code->getUserId(),
+            'expires' => $code->getExpires()->getTimestamp(),
             'redirect_uri' => implode(',', $code->getRedirectUri()),
             'scope' => $code->getScope()
         );
@@ -90,15 +89,15 @@ class ClientCredentials implements AuthorizationCodeInterface
 
         if (!$client) throw new \Exception('Unknown client identifier');
         
-        $code = new AuthorizationCode();
-        $code->setCode($code);
-        $code->setClient($client);
-        $code->setUserId($user_id);
-        $code->setRedirectUri($redirect_uri);
-        $code->setExpires($expires);
-        $code->setScope($scope);
+        $authorizationCode = new \OAuth2\ServerBundle\Entity\AuthorizationCode();
+        $authorizationCode->setCode($code);
+        $authorizationCode->setClient($client);
+        $authorizationCode->setUserId($user_id);
+        $authorizationCode->setRedirectUri($redirect_uri);
+        $authorizationCode->setExpires(new \DateTime('@' . $expires));
+        $authorizationCode->setScope($scope);
 
-        $this->em->persist($product);
+        $this->em->persist($authorizationCode);
         $this->em->flush();
     }
 

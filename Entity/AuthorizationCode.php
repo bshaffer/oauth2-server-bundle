@@ -71,9 +71,7 @@ class AuthorizationCode
      */
     public function setExpires($expires)
     {
-        $timezone = new \DateTimeZone('UTC');
-        $date = new \DateTime('now', $timezone);
-        $this->expires = $date->setTimestamp($expires);
+        $this->expires = $expires;
 
         return $this;
     }
