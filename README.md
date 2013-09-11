@@ -82,3 +82,41 @@ parameters:
 Where `Amce\OAuth2ServerBundle\Storage\ClientCredentials` is your own implementation of the ClientCredentials interface.
 
 If you provide your own storage managers then you'll be able to hook everything up to your own custom Entities.
+
+## User Credentials (Resource Owner Password)
+
+To make it easy to plug-in your own User Provider we've conformed to the `UserInterface`, `UserProviderInterface` & `EncoderFactoryInterface`.
+
+Therefore to make proper use of the user credentials grant type you'll need to modify your config.yml with the relevant classes.
+
+``` yaml
+# app/config/config.yml
+
+parameters:
+    oauth2.user_provider.class: Amce\OAuth2ServerBundle\User\OAuth2UserProvider
+```
+
+If you want to take advantage of scope restriction on a per user basis your User entity will need to implement the `OAuth2\ServerBundle\OAuth2UserInterface` or `OAuth2\ServerBundle\AdvancedOAuth2UserInterface`.
+
+Out of the box we do provide a basic user provider and entity for you to use. Setup your security.yml to use it:
+
+```yaml
+# app/config/security.yml
+
+security:
+    encoders:
+        OAuth2\ServerBundle\Entity\User:
+            algorithm:          sha512
+            encode_as_base64:   true
+            iterations:         5000
+
+    providers:
+        oauth2:
+            id: oauth2.user_provider
+```
+
+You'll need some users first though! Use the console command to create a new user:
+
+```sh
+$ app/console OAuth2:CreateUser username password
+```
