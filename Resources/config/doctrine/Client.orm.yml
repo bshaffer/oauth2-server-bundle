@@ -10,7 +10,8 @@ OAuth2\ServerBundle\Entity\Client:
             type:       string
             length:     40
         redirect_uri:
-            type:       string
-            length:     255
-            default:    ""
+            type:       simple_array
+        grant_types:
+            type:       simple_array
+            nullable:   true
     lifecycleCallbacks: {  }
