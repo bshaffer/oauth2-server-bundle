@@ -62,6 +62,9 @@
         </service>
         <service id="oauth2.grant_type.refresh_token" class="%oauth2.grant_type.refresh_token.class%">
             <argument type="service" id="oauth2.storage.refresh_token"/>
+            <argument type="collection">
+                <argument key="always_issue_new_refresh_token">false</argument>
+            </argument>
         </service>
     </services>
 </container>

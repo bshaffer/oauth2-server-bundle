@@ -9,10 +9,11 @@ The following grant types are supported out the box:
 - Client Credentials
 - Authorization Code
 - Refresh Token
+- User Credentials (see below)
 
 You can make token requests to the `/token` path via POST.
 
-You can restrict the grant types available per client, or in your own TokenController you could do something like:
+You can restrict the grant types available per client in the database, use a Compiler Pass or in your own TokenController you could do something like:
 
 ``` php
 public function tokenAction()
@@ -25,8 +26,6 @@ public function tokenAction()
     return $server->handleTokenRequest($this->get('oauth2.request'), $this->get('oauth2.response'));
 }
 ```
-
-Some grant types allow for further configuration, like the refresh token. To take advantage of this you'll need you a CompilerPass to redefine the service definition.
 
 ## Installation
 
@@ -138,5 +137,55 @@ security:
 You'll need some users first though! Use the console command to create a new user:
 
 ```sh
-$ app/console OAuth2:CreateUser username password
+$ php app/console OAuth2:CreateUser username password
+```
+
+## Configuring Grant Types
+
+You'll need to use a Compiler Pass to configure settings for a grant type. For example say we want our refresh tokens to always get renewed:
+
+``` php
+// Amce/OAuth2ServerBundle/AmceOAuth2ServerBundle.php
+
+namespace Amce\OAuth2ServerBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Amce\OAuth2ServerBundle\DependencyInjection\Compiler\OAuth2CompilerPass;
+
+class AmceOAuth2ServerBundle extends Bundle
+{
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new OAuth2CompilerPass());
+    }
+}
+```
+
+``` php
+// Amce/OAuth2ServerBundle/DependencyInjection\Compiler\OAuth2CompilerPass.php
+
+namespace Amce\OAuth2ServerBundle\DependencyInjection\Compiler;
+
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Reference;
+
+class OAuth2CompilerPass implements CompilerPassInterface
+{
+    public function process(ContainerBuilder $container)
+    {
+        // Override Refresh Token Grant Type Settings
+        $serviceId = 'oauth2.grant_type.refresh_token';
+        if ($container->hasDefinition($serviceId)) {
+            $definition = $container->getDefinition($serviceId);
+            $definition->replaceArgument(1, array(
+                'always_issue_new_refresh_token' => TRUE
+            ));
+        }
+    }
+}
+
 ```
