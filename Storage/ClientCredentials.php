@@ -78,7 +78,7 @@ class ClientCredentials implements ClientCredentialsInterface
         if (!$client) return FALSE;
 
         return array(
-            'redirect_uri' => implode(',', $client->getRedirectUri()),
+            'redirect_uri' => implode(' ', $client->getRedirectUri()),
             'client_id' => $client->getClientId(),
             'grant_types' => $client->getGrantTypes()
         );
