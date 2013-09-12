@@ -22,7 +22,14 @@ class AuthorizeController extends Controller
             return $server->getResponse();
         }
 
-        return array('request' => $this->get('oauth2.request')->query->all());  
+        // Get descriptions for scopes if available
+        $scopes = array();
+        $scopeStorage = $this->get('oauth2.storage.scope');
+        foreach (explode(' ', $this->get('oauth2.request')->query->get('scope')) as $scope) {
+            $scopes[] = $scopeStorage->getDescriptionForScope($scope);
+        }
+
+        return array('request' => $this->get('oauth2.request')->query->all(), 'scopes' => $scopes);  
     }
 
     /**

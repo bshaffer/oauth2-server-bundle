@@ -43,6 +43,7 @@ class AccessToken implements AccessTokenInterface
 
         return array(
             'client_id' => $client->getClientId(),
+            'user_id' => $accessToken->getUserId(),
             'expires' => $accessToken->getExpires()->getTimestamp(),
             'scope' => $accessToken->getScope()
         );

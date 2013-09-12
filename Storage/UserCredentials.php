@@ -7,8 +7,8 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use OAuth2\ServerBundle\OAuth2UserInterface;
-use OAuth2\ServerBundle\AdvancedOAuth2UserInterface;
+use OAuth2\ServerBundle\User\OAuth2UserInterface;
+use OAuth2\ServerBundle\User\AdvancedOAuth2UserInterface;
 
 class UserCredentials implements UserCredentialsInterface
 {

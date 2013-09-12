@@ -14,4 +14,7 @@ OAuth2\ServerBundle\Entity\Client:
         grant_types:
             type:       simple_array
             nullable:   true
+        scopes:
+            type:       simple_array
+            nullable:   true
     lifecycleCallbacks: {  }

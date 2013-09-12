@@ -79,12 +79,12 @@ class Client
     /**
      * Set redirect_uri
      *
-     * @param string $redirectUri
+     * @param array $redirectUri
      * @return Client
      */
     public function setRedirectUri($redirectUri)
     {
-        $this->redirect_uri = explode(',', $redirectUri);
+        $this->redirect_uri = $redirectUri;
 
         return $this;
     }
@@ -120,5 +120,33 @@ class Client
     public function getGrantTypes()
     {
         return $this->grant_types;
+    }
+    /**
+     * @var array
+     */
+    private $scopes;
+
+
+    /**
+     * Set scopes
+     *
+     * @param array $scopes
+     * @return Client
+     */
+    public function setScopes($scopes)
+    {
+        $this->scopes = $scopes;
+    
+        return $this;
+    }
+
+    /**
+     * Get scopes
+     *
+     * @return array 
+     */
+    public function getScopes()
+    {
+        return $this->scopes;
     }
 }
