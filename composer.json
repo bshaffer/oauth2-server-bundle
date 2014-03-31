@@ -13,8 +13,8 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "bshaffer/oauth2-server-php": "dev-develop",
-        "bshaffer/oauth2-server-httpfoundation-bridge": "dev-develop"
+        "bshaffer/oauth2-server-php": "dev-master",
+        "bshaffer/oauth2-server-httpfoundation-bridge": "dev-master"
     },
     "autoload": {
         "psr-0": { "OAuth2\\ServerBundle": "" }
