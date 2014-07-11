@@ -21,7 +21,7 @@ class CreateScopeCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getApplication()->getKernel()->getContainer();
+        $container = $this->getContainer();
         $scopeManager = $container->get('oauth2.scope_manager');
 
         try {

@@ -3,7 +3,7 @@
 namespace OAuth2\ServerBundle\Entity;
 
 /**
- * Scope
+ * Powma\ServiceBundle\Entity\User
  */
 class Scope
 {

@@ -16,6 +16,10 @@
         "bshaffer/oauth2-server-php": "dev-master",
         "bshaffer/oauth2-server-httpfoundation-bridge": "dev-master"
     },
+    "require-dev": {
+        "symfony/symfony":                  "2.5.*",
+        "doctrine/orm":                     "2.4.*"
+    },
     "autoload": {
         "psr-0": { "OAuth2\\ServerBundle": "" }
     },
