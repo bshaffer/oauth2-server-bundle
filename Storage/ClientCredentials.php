@@ -113,4 +113,49 @@ class ClientCredentials implements ClientCredentialsInterface
 
         return FALSE;
     }
+
+    /**
+     * Determine if the client is a "public" client, and therefore
+     * does not require passing credentials for certain grant types
+     *
+     * @param $client_id
+     * Client identifier to be check with.
+     *
+     * @return
+     * TRUE if the client is public, and FALSE if it isn't.
+     * @endcode
+     *
+     * @see http://tools.ietf.org/html/rfc6749#section-2.3
+     * @see https://github.com/bshaffer/oauth2-server-php/issues/257
+     *
+     * @ingroup oauth2_section_2
+     */
+    public function isPublicClient($client_id)
+    {
+        $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
+
+        if (!$client) {
+            return false;
+        }
+
+        return $client->getClientSecret();
+    }
+
+    /**
+     * Get the scope associated with this client
+     *
+     * @return
+     * STRING the space-delineated scope list for the specified client_id
+     */
+    public function getClientScope($client_id)
+    {
+        // Get Client
+        $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
+
+        if (!$client) {
+            return false;
+        }
+
+        return $client->getScopes();
+    }
 }
