@@ -4,10 +4,7 @@ namespace OAuth2\ServerBundle\Storage;
 
 use OAuth2\Storage\ClientCredentialsInterface;
 use Doctrine\ORM\EntityManager;
-use OAuth2\ServerBundle\Entity\AccessToken;
 use OAuth2\ServerBundle\Entity\Client;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 
 class ClientCredentials implements ClientCredentialsInterface
 {
@@ -44,7 +41,7 @@ class ClientCredentials implements ClientCredentialsInterface
             return $client->getClientSecret() === $client_secret;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -57,15 +54,15 @@ class ClientCredentials implements ClientCredentialsInterface
      * Client identifier to be check with.
      *
      * @return array
-     * Client details. The only mandatory key in the array is "redirect_uri".
-     * This function MUST return FALSE if the given client does not exist or is
-     * invalid. "redirect_uri" can be space-delimited to allow for multiple valid uris.
+     *               Client details. The only mandatory key in the array is "redirect_uri".
+     *               This function MUST return FALSE if the given client does not exist or is
+     *               invalid. "redirect_uri" can be space-delimited to allow for multiple valid uris.
      * @code
-     * return array(
-     *     "redirect_uri" => REDIRECT_URI,      // REQUIRED redirect_uri registered for the client
-     *     "client_id"    => CLIENT_ID,         // OPTIONAL the client id
-     *     "grant_types"  => GRANT_TYPES,       // OPTIONAL an array of restricted grant types
-     * );
+     *               return array(
+     *               "redirect_uri" => REDIRECT_URI,      // REQUIRED redirect_uri registered for the client
+     *               "client_id"    => CLIENT_ID,         // OPTIONAL the client id
+     *               "grant_types"  => GRANT_TYPES,       // OPTIONAL an array of restricted grant types
+     *               );
      * @endcode
      *
      * @ingroup oauth2_section_4
@@ -75,7 +72,9 @@ class ClientCredentials implements ClientCredentialsInterface
         // Get Client
         $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
 
-        if (!$client) return FALSE;
+        if (!$client) {
+            return false;
+        }
 
         return array(
             'redirect_uri' => implode(' ', $client->getRedirectUri()),
@@ -105,13 +104,19 @@ class ClientCredentials implements ClientCredentialsInterface
     {
         $client = $this->getClientDetails($client_id);
 
-        if (!$client) return FALSE;
+        if (!$client) {
+            return false;
+        }
 
-        if (empty($client['grant_types'])) return TRUE;
+        if (empty($client['grant_types'])) {
+            return true;
+        }
 
-        if (in_array($grant_type, $client['grant_types'])) return TRUE;
+        if (in_array($grant_type, $client['grant_types'])) {
+            return true;
+        }
 
-        return FALSE;
+        return false;
     }
 
     /**

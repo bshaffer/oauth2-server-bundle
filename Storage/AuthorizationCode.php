@@ -46,7 +46,9 @@ class AuthorizationCode implements AuthorizationCodeInterface
         // Get Code
         $code = $this->em->getRepository('OAuth2ServerBundle:AuthorizationCode')->find($code);
 
-        if (!$code) return NULL;
+        if (!$code) {
+            return null;
+        }
 
         return array(
             'client_id' => $code->getClient()->getClientId(),
@@ -75,11 +77,11 @@ class AuthorizationCode implements AuthorizationCodeInterface
      * @param $user_id
      * User identifier to be stored.
      * @param string $redirect_uri
-     * Redirect URI(s) to be stored in a space-separated string.
-     * @param int $expires
-     * Expiration to be stored as a Unix timestamp.
+     *                             Redirect URI(s) to be stored in a space-separated string.
+     * @param int    $expires
+     *                             Expiration to be stored as a Unix timestamp.
      * @param string $scope
-     * (optional) Scopes to be stored in space-separated string.
+     *                             (optional) Scopes to be stored in space-separated string.
      *
      * @ingroup oauth2_section_4
      */
@@ -88,7 +90,7 @@ class AuthorizationCode implements AuthorizationCodeInterface
         $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
 
         if (!$client) throw new \Exception('Unknown client identifier');
-        
+
         $authorizationCode = new \OAuth2\ServerBundle\Entity\AuthorizationCode();
         $authorizationCode->setCode($code);
         $authorizationCode->setClient($client);

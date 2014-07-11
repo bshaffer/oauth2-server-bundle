@@ -5,7 +5,6 @@ namespace OAuth2\ServerBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateUserCommand extends ContainerAwareCommand
@@ -27,10 +26,9 @@ class CreateUserCommand extends ContainerAwareCommand
 
         try {
             $userProvider->createUser($input->getArgument('username'), $input->getArgument('password'));
-        }
-        catch(\Doctrine\DBAL\DBALException $e)
-        {
+        } catch (\Doctrine\DBAL\DBALException $e) {
             $output->writeln('<fg=red>Unable to create user ' . $input->getArgument('username') . '</fg=red>');
+
             return;
         }
 
