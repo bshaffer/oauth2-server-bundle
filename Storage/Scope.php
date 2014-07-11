@@ -27,22 +27,33 @@ class Scope implements ScopeInterface
      */
     public function scopeExists($scope, $client_id = null)
     {
-        // Get Client
-        $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
-
-        if (!$client) {
-            return false;
-        }
-
         $scopes = explode(' ', $scope);
+        if ($client_id) {
+            // Get Client
+            $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
 
-        foreach ($scopes as $scope) {
-            if (!in_array($scope, $client->getScopes())) {
+            if (!$client) {
                 return false;
             }
+
+            $valid_scopes = $client->getScopes();
+
+            foreach ($scopes as $scope) {
+                if (!in_array($scope, $valid_scopes)) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
-        return true;
+        $valid_scopes = $this->em->getRepository('OAuth2ServerBundle:Scope')
+            ->createQueryBuilder('a')
+            ->where('a.scope in (?1)')
+            ->setParameter(1, implode(',', $scopes))
+            ->getQuery()->getResult();
+
+        return count($valid_scopes) == count($scopes);
     }
 
     /**

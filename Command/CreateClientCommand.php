@@ -23,7 +23,7 @@ class CreateClientCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getApplication()->getKernel()->getContainer();
+        $container = $this->getContainer();
         $clientManager = $container->get('oauth2.client_manager');
 
         try {
@@ -35,12 +35,13 @@ class CreateClientCommand extends ContainerAwareCommand
             );
         } catch (\Doctrine\DBAL\DBALException $e) {
             $output->writeln('<fg=red>Unable to create client ' . $input->getArgument('identifier') . '</fg=red>');
+            $output->writeln('<fg=red>' . $e->getMessage() . '</fg=red>');
 
-            return;
+            return 1;
         } catch (\OAuth2\ServerBundle\Exception\ScopeNotFoundException $e) {
             $output->writeln('<fg=red>Scope not found, please create it first</fg=red>');
 
-            return;
+            return 1;
         }
 
         $output->writeln('<fg=green>Client ' . $input->getArgument('identifier') . ' created with secret ' . $client->getClientSecret() . '</fg=green>');
