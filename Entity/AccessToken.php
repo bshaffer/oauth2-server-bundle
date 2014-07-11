@@ -2,10 +2,8 @@
 
 namespace OAuth2\ServerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
-class AccessToken {
-
+class AccessToken
+{
     /**
      * @var string
      */
@@ -31,24 +29,23 @@ class AccessToken {
      */
     private $client;
 
-
     /**
      * Set token
      *
-     * @param string $token
+     * @param  string      $token
      * @return AccessToken
      */
     public function setToken($token)
     {
         $this->token = $token;
-    
+
         return $this;
     }
 
     /**
      * Get token
      *
-     * @return string 
+     * @return string
      */
     public function getToken()
     {
@@ -58,20 +55,20 @@ class AccessToken {
     /**
      * Set user_id
      *
-     * @param string $userId
+     * @param  string      $userId
      * @return AccessToken
      */
     public function setUserId($userId)
     {
         $this->user_id = $userId;
-    
+
         return $this;
     }
 
     /**
      * Get user_id
      *
-     * @return string 
+     * @return string
      */
     public function getUserId()
     {
@@ -81,20 +78,20 @@ class AccessToken {
     /**
      * Set expires
      *
-     * @param \DateTime $expires
+     * @param  \DateTime   $expires
      * @return AccessToken
      */
     public function setExpires($expires)
     {
         $this->expires = $expires;
-    
+
         return $this;
     }
 
     /**
      * Get expires
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getExpires()
     {
@@ -104,20 +101,20 @@ class AccessToken {
     /**
      * Set scope
      *
-     * @param string $scope
+     * @param  string      $scope
      * @return AccessToken
      */
     public function setScope($scope)
     {
         $this->scope = $scope;
-    
+
         return $this;
     }
 
     /**
      * Get scope
      *
-     * @return string 
+     * @return string
      */
     public function getScope()
     {
@@ -127,20 +124,20 @@ class AccessToken {
     /**
      * Set client
      *
-     * @param \OAuth2\ServerBundle\Entity\Client $client
+     * @param  \OAuth2\ServerBundle\Entity\Client $client
      * @return AccessToken
      */
     public function setClient(\OAuth2\ServerBundle\Entity\Client $client = null)
     {
         $this->client = $client;
-    
+
         return $this;
     }
 
     /**
      * Get client
      *
-     * @return \OAuth2\ServerBundle\Entity\Client 
+     * @return \OAuth2\ServerBundle\Entity\Client
      */
     public function getClient()
     {

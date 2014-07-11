@@ -30,15 +30,19 @@ class Scope implements ScopeInterface
         // Get Client
         $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
 
-        if (!$client) return FALSE;
+        if (!$client) {
+            return false;
+        }
 
         $scopes = explode(' ', $scope);
 
-        foreach($scopes as $scope) {
-            if (!in_array($scope, $client->getScopes())) return FALSE;
+        foreach ($scopes as $scope) {
+            if (!in_array($scope, $client->getScopes())) {
+                return false;
+            }
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -60,7 +64,7 @@ class Scope implements ScopeInterface
      */
     public function getDefaultScope($client_id = null)
     {
-        return FALSE;
+        return false;
     }
 
     /**
@@ -75,7 +79,9 @@ class Scope implements ScopeInterface
         // Get Scope
         $scopeObject = $this->em->getRepository('OAuth2ServerBundle:Scope')->find($scope);
 
-        if (!$scopeObject) return $scope;
+        if (!$scopeObject) {
+            return $scope;
+        }
 
         return $scopeObject->getDescription();
     }

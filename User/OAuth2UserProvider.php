@@ -14,7 +14,7 @@ class OAuth2UserProvider implements UserProviderInterface
     private $em;
     private $encoderFactory;
 
-    function __construct(EntityManager $entityManager, EncoderFactoryInterface $encoderFactory)
+    public function __construct(EntityManager $entityManager, EncoderFactoryInterface $encoderFactory)
     {
         $this->em = $entityManager;
         $this->encoderFactory = $encoderFactory;
@@ -39,7 +39,9 @@ class OAuth2UserProvider implements UserProviderInterface
     {
         $user = $this->em->getRepository('OAuth2ServerBundle:User')->find($username);
 
-        if (!$user) throw new UsernameNotFoundException(sprintf('Username "%s" not found.', $username));
+        if (!$user) {
+            throw new UsernameNotFoundException(sprintf('Username "%s" not found.', $username));
+        }
 
         return $user;
     }
@@ -75,9 +77,11 @@ class OAuth2UserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        if ($class == 'OAuth2User') return TRUE;
+        if ($class == 'OAuth2User') {
+            return true;
+        }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -119,7 +123,8 @@ class OAuth2UserProvider implements UserProviderInterface
      *
      * @return A salt
      */
-    protected function generateSalt() {
+    protected function generateSalt()
+    {
         return base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 }

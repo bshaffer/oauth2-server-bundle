@@ -5,7 +5,6 @@ namespace OAuth2\ServerBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateClientCommand extends ContainerAwareCommand
@@ -34,15 +33,13 @@ class CreateClientCommand extends ContainerAwareCommand
                 explode(',', $input->getArgument('grant_types')),
                 explode(',', $input->getArgument('scopes'))
             );
-        }
-        catch(\Doctrine\DBAL\DBALException $e)
-        {
+        } catch (\Doctrine\DBAL\DBALException $e) {
             $output->writeln('<fg=red>Unable to create client ' . $input->getArgument('identifier') . '</fg=red>');
+
             return;
-        }
-        catch(\OAuth2\ServerBundle\Exception\ScopeNotFoundException $e)
-        {
+        } catch (\OAuth2\ServerBundle\Exception\ScopeNotFoundException $e) {
             $output->writeln('<fg=red>Scope not found, please create it first</fg=red>');
+
             return;
         }
 
