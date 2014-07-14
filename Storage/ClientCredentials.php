@@ -143,7 +143,9 @@ class ClientCredentials implements ClientCredentialsInterface
             return false;
         }
 
-        return $client->getClientSecret();
+        $secret = $client->getClientSecret();
+
+        return empty($secret);
     }
 
     /**
