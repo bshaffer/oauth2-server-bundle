@@ -4,10 +4,7 @@ namespace OAuth2\ServerBundle\Storage;
 
 use OAuth2\Storage\ClientCredentialsInterface;
 use Doctrine\ORM\EntityManager;
-use OAuth2\ServerBundle\Entity\AccessToken;
 use OAuth2\ServerBundle\Entity\Client;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 
 class ClientCredentials implements ClientCredentialsInterface
 {
@@ -44,7 +41,7 @@ class ClientCredentials implements ClientCredentialsInterface
             return $client->getClientSecret() === $client_secret;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -57,15 +54,15 @@ class ClientCredentials implements ClientCredentialsInterface
      * Client identifier to be check with.
      *
      * @return array
-     * Client details. The only mandatory key in the array is "redirect_uri".
-     * This function MUST return FALSE if the given client does not exist or is
-     * invalid. "redirect_uri" can be space-delimited to allow for multiple valid uris.
+     *               Client details. The only mandatory key in the array is "redirect_uri".
+     *               This function MUST return FALSE if the given client does not exist or is
+     *               invalid. "redirect_uri" can be space-delimited to allow for multiple valid uris.
      * @code
-     * return array(
-     *     "redirect_uri" => REDIRECT_URI,      // REQUIRED redirect_uri registered for the client
-     *     "client_id"    => CLIENT_ID,         // OPTIONAL the client id
-     *     "grant_types"  => GRANT_TYPES,       // OPTIONAL an array of restricted grant types
-     * );
+     *               return array(
+     *               "redirect_uri" => REDIRECT_URI,      // REQUIRED redirect_uri registered for the client
+     *               "client_id"    => CLIENT_ID,         // OPTIONAL the client id
+     *               "grant_types"  => GRANT_TYPES,       // OPTIONAL an array of restricted grant types
+     *               );
      * @endcode
      *
      * @ingroup oauth2_section_4
@@ -75,7 +72,9 @@ class ClientCredentials implements ClientCredentialsInterface
         // Get Client
         $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
 
-        if (!$client) return FALSE;
+        if (!$client) {
+            return false;
+        }
 
         return array(
             'redirect_uri' => implode(' ', $client->getRedirectUri()),
@@ -105,12 +104,65 @@ class ClientCredentials implements ClientCredentialsInterface
     {
         $client = $this->getClientDetails($client_id);
 
-        if (!$client) return FALSE;
+        if (!$client) {
+            return false;
+        }
 
-        if (empty($client['grant_types'])) return TRUE;
+        if (empty($client['grant_types'])) {
+            return true;
+        }
 
-        if (in_array($grant_type, $client['grant_types'])) return TRUE;
+        if (in_array($grant_type, $client['grant_types'])) {
+            return true;
+        }
 
-        return FALSE;
+        return false;
+    }
+
+    /**
+     * Determine if the client is a "public" client, and therefore
+     * does not require passing credentials for certain grant types
+     *
+     * @param $client_id
+     * Client identifier to be check with.
+     *
+     * @return
+     * TRUE if the client is public, and FALSE if it isn't.
+     * @endcode
+     *
+     * @see http://tools.ietf.org/html/rfc6749#section-2.3
+     * @see https://github.com/bshaffer/oauth2-server-php/issues/257
+     *
+     * @ingroup oauth2_section_2
+     */
+    public function isPublicClient($client_id)
+    {
+        $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
+
+        if (!$client) {
+            return false;
+        }
+
+        $secret = $client->getClientSecret();
+
+        return empty($secret);
+    }
+
+    /**
+     * Get the scope associated with this client
+     *
+     * @return
+     * STRING the space-delineated scope list for the specified client_id
+     */
+    public function getClientScope($client_id)
+    {
+        // Get Client
+        $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
+
+        if (!$client) {
+            return false;
+        }
+
+        return $client->getScopes();
     }
 }

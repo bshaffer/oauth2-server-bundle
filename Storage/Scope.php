@@ -27,18 +27,33 @@ class Scope implements ScopeInterface
      */
     public function scopeExists($scope, $client_id = null)
     {
-        // Get Client
-        $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
-
-        if (!$client) return FALSE;
-
         $scopes = explode(' ', $scope);
+        if ($client_id) {
+            // Get Client
+            $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
 
-        foreach($scopes as $scope) {
-            if (!in_array($scope, $client->getScopes())) return FALSE;
+            if (!$client) {
+                return false;
+            }
+
+            $valid_scopes = $client->getScopes();
+
+            foreach ($scopes as $scope) {
+                if (!in_array($scope, $valid_scopes)) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
-        return TRUE;
+        $valid_scopes = $this->em->getRepository('OAuth2ServerBundle:Scope')
+            ->createQueryBuilder('a')
+            ->where('a.scope in (?1)')
+            ->setParameter(1, implode(',', $scopes))
+            ->getQuery()->getResult();
+
+        return count($valid_scopes) == count($scopes);
     }
 
     /**
@@ -60,7 +75,7 @@ class Scope implements ScopeInterface
      */
     public function getDefaultScope($client_id = null)
     {
-        return FALSE;
+        return false;
     }
 
     /**
@@ -75,7 +90,9 @@ class Scope implements ScopeInterface
         // Get Scope
         $scopeObject = $this->em->getRepository('OAuth2ServerBundle:Scope')->find($scope);
 
-        if (!$scopeObject) return $scope;
+        if (!$scopeObject) {
+            return $scope;
+        }
 
         return $scopeObject->getDescription();
     }

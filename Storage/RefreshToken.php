@@ -41,7 +41,9 @@ class RefreshToken implements RefreshTokenInterface
     {
         $refreshToken = $this->em->getRepository('OAuth2ServerBundle:RefreshToken')->find($refresh_token);
 
-        if (!$refreshToken) return NULL;
+        if (!$refreshToken) {
+            return null;
+        }
 
         // Get Client
         $client = $refreshToken->getClient();
@@ -83,7 +85,9 @@ class RefreshToken implements RefreshTokenInterface
     {
         // Get Client Entity
         $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
-        if (!$client) return NULL;
+        if (!$client) {
+            return null;
+        }
 
         // Create Refresh Token
         $refreshToken = new \OAuth2\ServerBundle\Entity\RefreshToken();

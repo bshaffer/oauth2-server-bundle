@@ -18,7 +18,7 @@ class AuthorizeController extends Controller
     {
         $server = $this->get('oauth2.server');
 
-        if(!$server->validateAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'))) {
+        if (!$server->validateAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'))) {
             return $server->getResponse();
         }
 
@@ -29,7 +29,7 @@ class AuthorizeController extends Controller
             $scopes[] = $scopeStorage->getDescriptionForScope($scope);
         }
 
-        return array('request' => $this->get('oauth2.request')->query->all(), 'scopes' => $scopes);  
+        return array('request' => $this->get('oauth2.request')->query->all(), 'scopes' => $scopes);
     }
 
     /**
@@ -40,6 +40,6 @@ class AuthorizeController extends Controller
     {
         $server = $this->get('oauth2.server');
 
-        return $server->handleAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'), TRUE);       
+        return $server->handleAuthorizeRequest($this->get('oauth2.request'), $this->get('oauth2.response'), true);
     }
 }

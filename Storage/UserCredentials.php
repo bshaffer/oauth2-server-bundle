@@ -51,24 +51,24 @@ class UserCredentials implements UserCredentialsInterface
         // Load user by username
         try {
             $user = $this->up->loadUserByUsername($username);
-        }
-        catch (\Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e)
-        {
-            return FALSE;
+        } catch (\Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e) {
+            return false;
         }
 
         // Do extra checks if implementing the AdvancedUserInterface
         if ($user instanceof AdvancedUserInterface) {
-            if ($user->isAccountNonExpired() === FALSE) return FALSE;
-            if ($user->isAccountNonLocked() === FALSE) return FALSE;
-            if ($user->isCredentialsNonExpired() === FALSE) return FALSE;
-            if ($user->isEnabled() === FALSE) return FALSE;
+            if ($user->isAccountNonExpired() === false) return false;
+            if ($user->isAccountNonLocked() === false) return false;
+            if ($user->isCredentialsNonExpired() === false) return false;
+            if ($user->isEnabled() === false) return false;
         }
 
         // Check password
-        if ($this->encoderFactory->getEncoder($user)->isPasswordValid($user->getPassword(), $password, $user->getSalt())) return TRUE;
+        if ($this->encoderFactory->getEncoder($user)->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
+            return true;
+        }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -88,19 +88,16 @@ class UserCredentials implements UserCredentialsInterface
         // Load user by username
         try {
             $user = $this->up->loadUserByUsername($username);
-        }
-        catch (\Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e)
-        {
-            return FALSE;
+        } catch (\Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e) {
+            return false;
         }
 
         // If user implements OAuth2UserInterface or AdvancedOAuth2UserInterface
         // then we can get the scopes, score!
         if ($user instanceof OAuth2UserInterface || $user instanceof AdvancedOAuth2UserInterface) {
             $scope = $user->getScope();
-        }
-        else {
-            $scope = NULL;
+        } else {
+            $scope = null;
         }
 
         return array(

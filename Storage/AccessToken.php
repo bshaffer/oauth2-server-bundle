@@ -36,7 +36,9 @@ class AccessToken implements AccessTokenInterface
     {
         $accessToken = $this->em->getRepository('OAuth2ServerBundle:AccessToken')->find($oauth_token);
 
-        if (!$accessToken) return NULL;
+        if (!$accessToken) {
+            return null;
+        }
 
         // Get Client
         $client = $accessToken->getClient();
@@ -60,10 +62,10 @@ class AccessToken implements AccessTokenInterface
      * Client identifier to be stored.
      * @param $user_id
      * User identifier to be stored.
-     * @param int $expires
-     * Expiration to be stored as a Unix timestamp.
+     * @param int    $expires
+     *                        Expiration to be stored as a Unix timestamp.
      * @param string $scope
-     * (optional) Scopes to be stored in space-separated string.
+     *                        (optional) Scopes to be stored in space-separated string.
      *
      * @ingroup oauth2_section_4
      */
@@ -71,7 +73,10 @@ class AccessToken implements AccessTokenInterface
     {
         // Get Client Entity
         $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
-        if (!$client) return NULL;
+
+        if (!$client) {
+            return null;
+        }
 
         // Create Access Token
         $accessToken = new \OAuth2\ServerBundle\Entity\AccessToken();

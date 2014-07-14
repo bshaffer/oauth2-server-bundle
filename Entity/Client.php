@@ -2,8 +2,6 @@
 
 namespace OAuth2\ServerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Client
  */
@@ -29,24 +27,23 @@ class Client
      */
     private $grant_types;
 
-
     /**
      * Set client_id
      *
-     * @param string $clientId
+     * @param  string $clientId
      * @return Client
      */
     public function setClientId($clientId)
     {
         $this->client_id = $clientId;
-    
+
         return $this;
     }
 
     /**
      * Get client_id
      *
-     * @return string 
+     * @return string
      */
     public function getClientId()
     {
@@ -56,20 +53,20 @@ class Client
     /**
      * Set client_secret
      *
-     * @param string $clientSecret
+     * @param  string $clientSecret
      * @return Client
      */
     public function setClientSecret($clientSecret)
     {
         $this->client_secret = $clientSecret;
-    
+
         return $this;
     }
 
     /**
      * Get client_secret
      *
-     * @return string 
+     * @return string
      */
     public function getClientSecret()
     {
@@ -79,7 +76,7 @@ class Client
     /**
      * Set redirect_uri
      *
-     * @param array $redirectUri
+     * @param  array  $redirectUri
      * @return Client
      */
     public function setRedirectUri($redirectUri)
@@ -92,7 +89,7 @@ class Client
     /**
      * Get redirect_uri
      *
-     * @return array 
+     * @return array
      */
     public function getRedirectUri()
     {
@@ -102,20 +99,20 @@ class Client
     /**
      * Set grant_types
      *
-     * @param array $grantTypes
+     * @param  array  $grantTypes
      * @return Client
      */
     public function setGrantTypes($grantTypes)
     {
         $this->grant_types = $grantTypes;
-    
+
         return $this;
     }
 
     /**
      * Get grant_types
      *
-     * @return array 
+     * @return array
      */
     public function getGrantTypes()
     {
@@ -126,24 +123,23 @@ class Client
      */
     private $scopes;
 
-
     /**
      * Set scopes
      *
-     * @param array $scopes
+     * @param  array  $scopes
      * @return Client
      */
     public function setScopes($scopes)
     {
         $this->scopes = $scopes;
-    
+
         return $this;
     }
 
     /**
      * Get scopes
      *
-     * @return array 
+     * @return array
      */
     public function getScopes()
     {

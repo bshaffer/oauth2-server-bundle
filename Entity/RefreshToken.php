@@ -2,8 +2,6 @@
 
 namespace OAuth2\ServerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * RefreshToken
  */
@@ -34,24 +32,23 @@ class RefreshToken
      */
     private $client;
 
-
     /**
      * Set token
      *
-     * @param string $token
+     * @param  string       $token
      * @return RefreshToken
      */
     public function setToken($token)
     {
         $this->token = $token;
-    
+
         return $this;
     }
 
     /**
      * Get token
      *
-     * @return string 
+     * @return string
      */
     public function getToken()
     {
@@ -61,20 +58,20 @@ class RefreshToken
     /**
      * Set user_id
      *
-     * @param string $userId
+     * @param  string       $userId
      * @return RefreshToken
      */
     public function setUserId($userId)
     {
         $this->user_id = $userId;
-    
+
         return $this;
     }
 
     /**
      * Get user_id
      *
-     * @return string 
+     * @return string
      */
     public function getUserId()
     {
@@ -84,20 +81,20 @@ class RefreshToken
     /**
      * Set expires
      *
-     * @param \DateTime $expires
+     * @param  \DateTime    $expires
      * @return RefreshToken
      */
     public function setExpires($expires)
     {
         $this->expires = $expires;
-    
+
         return $this;
     }
 
     /**
      * Get expires
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getExpires()
     {
@@ -107,20 +104,20 @@ class RefreshToken
     /**
      * Set scope
      *
-     * @param string $scope
+     * @param  string       $scope
      * @return RefreshToken
      */
     public function setScope($scope)
     {
         $this->scope = $scope;
-    
+
         return $this;
     }
 
     /**
      * Get scope
      *
-     * @return string 
+     * @return string
      */
     public function getScope()
     {
@@ -130,20 +127,20 @@ class RefreshToken
     /**
      * Set client
      *
-     * @param \OAuth2\ServerBundle\Entity\Client $client
+     * @param  \OAuth2\ServerBundle\Entity\Client $client
      * @return RefreshToken
      */
     public function setClient(\OAuth2\ServerBundle\Entity\Client $client = null)
     {
         $this->client = $client;
-    
+
         return $this;
     }
 
     /**
      * Get client
      *
-     * @return \OAuth2\ServerBundle\Entity\Client 
+     * @return \OAuth2\ServerBundle\Entity\Client
      */
     public function getClient()
     {

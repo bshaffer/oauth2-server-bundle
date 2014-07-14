@@ -2,7 +2,6 @@
 
 namespace OAuth2\ServerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use OAuth2\ServerBundle\User\OAuth2UserInterface;
 
 /**
@@ -35,24 +34,23 @@ class User implements OAuth2UserInterface
      */
     private $scopes;
 
-
     /**
      * Set username
      *
-     * @param string $username
+     * @param  string $username
      * @return User
      */
     public function setUsername($username)
     {
         $this->username = $username;
-    
+
         return $this;
     }
 
     /**
      * Get username
      *
-     * @return string 
+     * @return string
      */
     public function getUsername()
     {
@@ -62,20 +60,20 @@ class User implements OAuth2UserInterface
     /**
      * Set password
      *
-     * @param string $password
+     * @param  string $password
      * @return User
      */
     public function setPassword($password)
     {
         $this->password = $password;
-    
+
         return $this;
     }
 
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -85,20 +83,20 @@ class User implements OAuth2UserInterface
     /**
      * Set salt
      *
-     * @param string $salt
+     * @param  string $salt
      * @return User
      */
     public function setSalt($salt)
     {
         $this->salt = $salt;
-    
+
         return $this;
     }
 
     /**
      * Get salt
      *
-     * @return string 
+     * @return string
      */
     public function getSalt()
     {
@@ -108,20 +106,20 @@ class User implements OAuth2UserInterface
     /**
      * Set roles
      *
-     * @param array $roles
+     * @param  array $roles
      * @return User
      */
     public function setRoles($roles)
     {
         $this->roles = $roles;
-    
+
         return $this;
     }
 
     /**
      * Get roles
      *
-     * @return array 
+     * @return array
      */
     public function getRoles()
     {
@@ -131,20 +129,20 @@ class User implements OAuth2UserInterface
     /**
      * Set scopes
      *
-     * @param array $scopes
+     * @param  array $scopes
      * @return User
      */
     public function setScopes($scopes)
     {
         $this->scopes = $scopes;
-    
+
         return $this;
     }
 
     /**
      * Get scopes
      *
-     * @return array 
+     * @return array
      */
     public function getScopes()
     {
@@ -154,17 +152,17 @@ class User implements OAuth2UserInterface
     /**
      * Get scope
      *
-     * @return string 
+     * @return string
      */
     public function getScope()
     {
         return implode(' ', $this->getScopes());
     }
-    
+
     /**
      * Erase credentials
      *
-     * @return void 
+     * @return void
      */
     public function eraseCredentials()
     {

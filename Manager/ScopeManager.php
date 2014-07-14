@@ -8,7 +8,7 @@ class ScopeManager
 {
     private $em;
 
-    function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager)
     {
         $this->em = $entityManager;
     }
@@ -22,7 +22,7 @@ class ScopeManager
      *
      * @return Scope
      */
-    public function createScope($scope, $description = NULL)
+    public function createScope($scope, $description = null)
     {
         $scopeObject = new \OAuth2\ServerBundle\Entity\Scope();
         $scopeObject->setScope($scope);

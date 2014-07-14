@@ -9,7 +9,7 @@ class ClientManager
 {
     private $em;
 
-    function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager)
     {
         $this->em = $entityManager;
     }
@@ -39,7 +39,9 @@ class ClientManager
         foreach ($scopes as $scope) {
             // Get Scope
             $scopeObject = $this->em->getRepository('OAuth2ServerBundle:Scope')->find($scope);
-            if (!$scopeObject) throw new ScopeNotFoundException();
+            if (!$scopeObject) {
+                throw new ScopeNotFoundException();
+            }
         }
 
         $client->setScopes($scopes);
@@ -56,7 +58,8 @@ class ClientManager
      *
      * @return A secret
      */
-    protected function generateSecret() {
+    protected function generateSecret()
+    {
         return base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 }
