@@ -163,6 +163,7 @@ class ClientCredentials implements ClientCredentialsInterface
             return false;
         }
 
-        return $client->getScopes();
+        $scopes = implode(" ", $client->getScopes());
+        return $scopes;
     }
 }
