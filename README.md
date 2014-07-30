@@ -2,7 +2,7 @@
 
 OAuth2 Server Bundle for Symfony 2.
 
-[![Build Status](https://secure.travis-ci.org/bshaffer/oauth2-server-php.png)](http://travis-ci.org/bshaffer/oauth2-server-php)
+[![Build Status](https://secure.travis-ci.org/bshaffer/oauth2-server-bundle.png)](http://travis-ci.org/bshaffer/oauth2-server-bundle)
 
 ## Overview
 
