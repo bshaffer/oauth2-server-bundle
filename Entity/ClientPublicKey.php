@@ -32,6 +32,9 @@ class ClientPublicKey
     {
         $this->client = $client;
 
+        // this is necessary as the client_id is the primary key
+        $this->client_id = $client->getClientId();
+
         return $this;
     }
 
@@ -43,29 +46,6 @@ class ClientPublicKey
     public function getClient()
     {
         return $this->client;
-    }
-
-    /**
-     * Set client
-     *
-     * @param  $client_id
-     * @return ClientPublicKey
-     */
-    public function setClientId($client_id)
-    {
-        $this->client_id = $client_id;
-
-        return $this;
-    }
-
-    /**
-     * Get client_id
-     *
-     * @return integer $client_id
-     */
-    public function getClientId()
-    {
-        return $this->client_id;
     }
 
     /**

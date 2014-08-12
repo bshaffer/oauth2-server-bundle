@@ -22,13 +22,14 @@ class ClientPublicKeyTest extends \PHPUnit_Framework_TestCase
         $em->flush();
 
         $public_key = new ClientPublicKey();
-        $public_key->setClientId($client->getClientId());
+        $public_key->setClient($client);
 
         // create and set the public key
         $res = openssl_pkey_new();
 
         // Extract the public key from $res to $pubKey
-        $pubKey = openssl_pkey_get_details($res)['key'];
+        $pubKeyDetails = openssl_pkey_get_details($res);
+        $pubKey = $pubKeyDetails['key'];
         $public_key->setPublicKey($pubKey);
 
         $em->persist($public_key);
