@@ -33,23 +33,13 @@ public function tokenAction()
 
 ### Step 1: Add package to Composer
 
-Add the bundle to your composer.json:
-
-``` js
-{
-    "require": {
-        "bshaffer/oauth2-server-bundle": "dev-master"
-    }
-}
-```
-
-Now tell composer to download the bundle by running the command:
+Use composer to add the requirement and download it by running the command:
 
 ``` bash
-$ php composer.phar update bshaffer/oauth2-server-bundle
+$ php composer.phar require bshaffer/oauth2-server-bundle
 ```
 
-Composer will install the bundle to your project's `vendor/bshaffer` directory.
+Composer will update your composer.json and install the bundle to your project's `vendor/bshaffer` directory.
 
 ### Step 2: Enable the bundle
 
