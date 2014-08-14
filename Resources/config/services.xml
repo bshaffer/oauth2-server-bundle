@@ -38,6 +38,9 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="security.encoder_factory"/>
         </service>
+        <service id="oauth2.scope_manager" class="%oauth2.scope_manager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
         <service id="oauth2.storage.client_credentials" class="%oauth2.storage.client_credentials.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
@@ -57,6 +60,7 @@
         </service>
         <service id="oauth2.storage.scope" class="%oauth2.storage.scope.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="oauth2.scope_manager"/>
         </service>
         <service id="oauth2.grant_type.client_credentials" class="%oauth2.grant_type.client_credentials.class%">
             <argument type="service" id="oauth2.storage.client_credentials"/>
@@ -75,9 +79,7 @@
         </service>
         <service id="oauth2.client_manager" class="%oauth2.client_manager.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
-        </service>
-        <service id="oauth2.scope_manager" class="%oauth2.scope_manager.class%">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="oauth2.scope_manager"/>
         </service>
     </services>
 </container>
