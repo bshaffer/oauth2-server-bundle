@@ -3,15 +3,22 @@
 namespace OAuth2\ServerBundle\Storage;
 
 use OAuth2\Storage\ScopeInterface;
+use OAuth2\ServerBundle\Manager\ScopeManagerInterface;
 use Doctrine\ORM\EntityManager;
 
 class Scope implements ScopeInterface
 {
     private $em;
 
-    public function __construct(EntityManager $entityManager)
+    /**
+     * @var ScopeManagerInterface
+     */
+    private $sm;
+
+    public function __construct(EntityManager $entityManager, ScopeManagerInterface $scopeManager)
     {
         $this->em = $entityManager;
+        $this->sm = $scopeManager;
     }
 
     /**
@@ -47,11 +54,7 @@ class Scope implements ScopeInterface
             return true;
         }
 
-        $valid_scopes = $this->em->getRepository('OAuth2ServerBundle:Scope')
-            ->createQueryBuilder('a')
-            ->where('a.scope in (?1)')
-            ->setParameter(1, implode(',', $scopes))
-            ->getQuery()->getResult();
+        $valid_scopes = $this->sm->findScopesByScopes($scopes);
 
         return count($valid_scopes) == count($scopes);
     }
@@ -88,7 +91,7 @@ class Scope implements ScopeInterface
     public function getDescriptionForScope($scope)
     {
         // Get Scope
-        $scopeObject = $this->em->getRepository('OAuth2ServerBundle:Scope')->find($scope);
+        $scopeObject = $this->sm->findScopeByScope($scope);
 
         if (!$scopeObject) {
             return $scope;
