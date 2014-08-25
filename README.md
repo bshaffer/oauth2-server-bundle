@@ -1,6 +1,6 @@
 # OAuth2 Server Bundle
 
-OAuth2 Server Bundle for Symfony 2, built on the [oauth2-server-php](github.com/bshaffer/oauth2-server-php) library.
+OAuth2 Server Bundle for Symfony 2, built on the [oauth2-server-php](https://github.com/bshaffer/oauth2-server-php) library.
 
 [![Build Status](https://secure.travis-ci.org/bshaffer/oauth2-server-bundle.png)](http://travis-ci.org/bshaffer/oauth2-server-bundle)
 
@@ -10,7 +10,7 @@ See the [Complete Documentation](http://bshaffer.github.io/oauth2-server-php-doc
 
 For documentation specific to this bundle, continue reading below.
 
-## Overview
+## Bundle Overview
 
 The following grant types are supported out the box:
 
