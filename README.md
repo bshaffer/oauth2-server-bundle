@@ -1,8 +1,14 @@
 # OAuth2 Server Bundle
 
-OAuth2 Server Bundle for Symfony 2.
+OAuth2 Server Bundle for Symfony 2, built on the [oauth2-server-php](github.com/bshaffer/oauth2-server-php) library.
 
 [![Build Status](https://secure.travis-ci.org/bshaffer/oauth2-server-bundle.png)](http://travis-ci.org/bshaffer/oauth2-server-bundle)
+
+## Getting Started
+
+See the [Complete Documentation](http://bshaffer.github.io/oauth2-server-php-docs/) for information regarding the OAuth2.0 protocol and the PHP library used by this bundle to implement it.
+
+For documentation specific to this bundle, continue reading below.
 
 ## Overview
 
