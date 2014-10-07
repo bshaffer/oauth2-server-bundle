@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="./Tests/bootstrap.php">
   <php>
-    <!-- <server name="CONTAINER_CONFIG" value="Resources/config/services_test.xml" /> -->
+    <!-- <server name="CONTAINER_CONFIG" value="Tests/Resources/config/services.xml" /> -->
   </php>
   <testsuites>
     <testsuite name="OAuth2ServerBundle Test Suite">
