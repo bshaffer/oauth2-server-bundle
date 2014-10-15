@@ -83,6 +83,13 @@ class AccessToken
      */
     public function setExpires($expires)
     {
+        if (!$expires instanceof \DateTime) {
+            // @see https://github.com/bshaffer/oauth2-server-bundle/issues/24
+            $dateTime = new \DateTime();
+            $dateTime->setTimestamp($expires);
+            $expires = $dateTime;
+        }
+
         $this->expires = $expires;
 
         return $this;
