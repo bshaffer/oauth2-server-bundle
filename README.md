@@ -1,10 +1,16 @@
 # OAuth2 Server Bundle
 
-OAuth2 Server Bundle for Symfony 2.
+OAuth2 Server Bundle for Symfony 2, built on the [oauth2-server-php](https://github.com/bshaffer/oauth2-server-php) library.
 
-[![Build Status](https://secure.travis-ci.org/bshaffer/oauth2-server-php.png)](http://travis-ci.org/bshaffer/oauth2-server-php)
+[![Build Status](https://secure.travis-ci.org/bshaffer/oauth2-server-bundle.png)](http://travis-ci.org/bshaffer/oauth2-server-bundle)
 
-## Overview
+## Getting Started
+
+See the [Complete Documentation](http://bshaffer.github.io/oauth2-server-php-docs/) for information regarding the OAuth2.0 protocol and the PHP library used by this bundle to implement it.
+
+For documentation specific to this bundle, continue reading below.
+
+## Bundle Overview
 
 The following grant types are supported out the box:
 
@@ -33,23 +39,13 @@ public function tokenAction()
 
 ### Step 1: Add package to Composer
 
-Add the bundle to your composer.json:
-
-``` js
-{
-    "require": {
-        "bshaffer/oauth2-server-bundle": "dev-master"
-    }
-}
-```
-
-Now tell composer to download the bundle by running the command:
+Use composer to add the requirement and download it by running the command:
 
 ``` bash
-$ php composer.phar update bshaffer/oauth2-server-bundle
+$ php composer.phar require bshaffer/oauth2-server-bundle
 ```
 
-Composer will install the bundle to your project's `vendor/bshaffer` directory.
+Composer will update your composer.json and install the bundle to your project's `vendor/bshaffer` directory.
 
 ### Step 2: Enable the bundle
 

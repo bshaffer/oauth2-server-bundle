@@ -64,7 +64,6 @@ class CreateClientCommandTest extends \PHPUnit_Framework_TestCase
 
         // verify client scope has been stored
         $clientScope = $storage->getClientScope($client_id);
-        $this->assertEquals(explode(',', $scope), $clientScope);
-
+        $this->assertEquals($scope, $clientScope);
     }
 }

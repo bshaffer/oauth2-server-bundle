@@ -83,7 +83,7 @@ class AccessToken implements AccessTokenInterface
         $accessToken->setToken($oauth_token);
         $accessToken->setClient($client);
         $accessToken->setUserId($user_id);
-        $accessToken->setExpires(new \DateTime('@' . $expires));
+        $accessToken->setExpires($expires);
         $accessToken->setScope($scope);
 
         // Store Access Token

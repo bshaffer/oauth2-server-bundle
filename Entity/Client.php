@@ -23,9 +23,14 @@ class Client
     private $redirect_uri;
 
     /**
-     * @var array
+     * @var \OAuth2\ServerBundle\Entity\ClientPublicKey $public_key
      */
     private $grant_types;
+
+    /**
+     * @var string
+     */
+    private $public_key;
 
     /**
      * Set client_id
@@ -144,5 +149,28 @@ class Client
     public function getScopes()
     {
         return $this->scopes;
+    }
+
+    /**
+     * Set public key
+     *
+     * @param  \OAuth2\ServerBundle\Entity\ClientPublicKey $public_key
+     * @return Client
+     */
+    public function setPublicKey(\OAuth2\ServerBundle\Entity\ClientPublicKey $public_key = null)
+    {
+        $this->public_key = $public_key;
+
+        return $this;
+    }
+
+    /**
+     * Get public key
+     *
+     * @return \OAuth2\ServerBundle\Entity\ClientPublicKey
+     */
+    public function getPublicKey()
+    {
+        return $this->public_key;
     }
 }

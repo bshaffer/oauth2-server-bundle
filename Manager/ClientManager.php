@@ -9,9 +9,15 @@ class ClientManager
 {
     private $em;
 
-    public function __construct(EntityManager $entityManager)
+    /**
+     * @var ScopeManagerInterface
+     */
+    private $sm;
+
+    public function __construct(EntityManager $entityManager, ScopeManagerInterface $scopeManager)
     {
         $this->em = $entityManager;
+        $this->sm = $scopeManager;
     }
 
     /**
@@ -38,7 +44,7 @@ class ClientManager
         // Verify scopes
         foreach ($scopes as $scope) {
             // Get Scope
-            $scopeObject = $this->em->getRepository('OAuth2ServerBundle:Scope')->find($scope);
+            $scopeObject = $this->sm->findScopeByScope($scope);
             if (!$scopeObject) {
                 throw new ScopeNotFoundException();
             }

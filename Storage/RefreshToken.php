@@ -94,7 +94,7 @@ class RefreshToken implements RefreshTokenInterface
         $refreshToken->setToken($refresh_token);
         $refreshToken->setClient($client);
         $refreshToken->setUserId($user_id);
-        $refreshToken->setExpires(new \DateTime('@' . $expires));
+        $refreshToken->setExpires($expires);
         $refreshToken->setScope($scope);
 
         // Store Refresh Token

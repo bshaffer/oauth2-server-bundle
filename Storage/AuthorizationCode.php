@@ -96,7 +96,7 @@ class AuthorizationCode implements AuthorizationCodeInterface
         $authorizationCode->setClient($client);
         $authorizationCode->setUserId($user_id);
         $authorizationCode->setRedirectUri($redirect_uri);
-        $authorizationCode->setExpires(new \DateTime('@' . $expires));
+        $authorizationCode->setExpires($expires);
         $authorizationCode->setScope($scope);
 
         $this->em->persist($authorizationCode);
