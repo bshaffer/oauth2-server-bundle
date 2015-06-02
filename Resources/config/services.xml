@@ -30,7 +30,8 @@
                 <argument type="service" id="oauth2.storage.scope" />
             </argument>
         </service>
-        <service id="oauth2.request" class="%oauth2.request.class%" factory-class="OAuth2\HttpFoundationBridge\Request" factory-method="createFromRequest" scope="request">
+        <service id="oauth2.request" class="%oauth2.request.class%" scope="request">
+            <factory class="OAuth2\HttpFoundationBridge\Request" method="createFromRequest" />
             <argument type="service" id="request"/>
         </service>
         <service id="oauth2.response" class="%oauth2.response.class%"/>
