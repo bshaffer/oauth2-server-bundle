@@ -5,20 +5,14 @@ namespace OAuth2\ServerBundle\Tests;
 use OAuth2\Request;
 use OAuth2\Response;
 use OAuth2\ServerBundle\Tests\ContainerLoader;
-use OAuth2\ServerBundle\Command\CreateClientCommand;
-use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Output\BufferedOutput;
 
 class ContainerTest extends \PHPUnit_Framework_TestCase
 {
     public function testOpenIdConfig()
     {
-        $openIdConfig = sprintf(<<<EOF
+        $openIdConfig = <<<EOF
 <?xml version="1.0"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <imports>
-        <import resource="%s" />
-    </imports>
     <parameters>
         <parameter key="oauth2.server.config" type="collection">
             <parameter key="use_openid_connect">true</parameter>
@@ -26,11 +20,12 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         </parameter>
     </parameters>
 </container>
-EOF
-, __DIR__.'/../vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/config/security.xml');
+EOF;
         file_put_contents($tmpFile = tempnam(sys_get_temp_dir(), 'openid-config'), $openIdConfig);
-
-        $container = ContainerLoader::buildTestContainer(array($tmpFile));
+        $container = ContainerLoader::buildTestContainer(array(
+            __DIR__.'/../vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/config/security.xml',
+            $tmpFile
+        ));
 
         $config = $container->getParameter('oauth2.server.config');
         $server = $container->get('oauth2.server');
