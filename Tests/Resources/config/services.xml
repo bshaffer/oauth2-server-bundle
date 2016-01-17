@@ -25,7 +25,7 @@
             </argument>
             <argument type="service" id="doctrine.entity_manager.config" />
         </service>
-        <service id="doctrine.entity_manager.config" class="Doctrine\ORM\Tools\Setup"c>
+        <service id="doctrine.entity_manager.config" class="Doctrine\ORM\Tools\Setup">
             <factory class="Doctrine\ORM\Tools\Setup" method="createConfiguration" />
             <argument>true</argument>
             <call method="setMetadataDriverImpl">
