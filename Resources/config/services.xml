@@ -35,7 +35,7 @@
             <argument>%oauth2.server.config%</argument>
         </service>
         <service id="oauth2.request" class="%oauth2.request.class%">
-            <factory class="OAuth2\HttpFoundationBridge\Request" method="createFromRequest" />
+            <factory class="OAuth2\HttpFoundationBridge\Request" method="createFromRequestStack" />
             <argument type="service" id="request_stack"/>
         </service>
         <service id="oauth2.response" class="%oauth2.response.class%"/>
