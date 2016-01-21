@@ -21,7 +21,7 @@
     "require": {
         "php": ">=5.5.9",
         "bshaffer/oauth2-server-php": ">=1.0",
-        "elhachmi/oauth2-server-httpfoundation-bridge": "dev-develop"
+        "elhachmi/oauth2-server-httpfoundation-bridge": "dev-@dev"
     },
     "require-dev": {
         "symfony/symfony":                  "3.0.*",
