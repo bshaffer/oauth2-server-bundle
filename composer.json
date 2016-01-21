@@ -12,17 +12,6 @@
         }
     ],
     "minimum-stability":"dev",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/elhachmi/oauth2-server-httpfoundation-bridge.git"
-        }
-    ],
-    "require": {
-        "php": ">=5.5.9",
-        "bshaffer/oauth2-server-php": ">=1.0",
-        "elhachmi/oauth2-server-httpfoundation-bridge": "1.2"
-    },
     "require-dev": {
         "symfony/symfony":                  "3.0.*",
         "doctrine/orm":                     "~2.4,>=2.4.5"
