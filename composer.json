@@ -18,7 +18,7 @@
         "bshaffer/oauth2-server-httpfoundation-bridge": ">=1.0"
     },
     "require-dev": {
-        "symfony/symfony":                  "2.5.*",
+        "symfony/symfony":                  "3.0.*",
         "doctrine/orm":                     "2.4.*"
     },
     "autoload": {
