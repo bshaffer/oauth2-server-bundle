@@ -4,6 +4,7 @@ namespace OAuth2\ServerBundle\Storage;
 
 use OAuth2\Storage\UserCredentialsInterface;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -15,12 +16,16 @@ class UserCredentials implements UserCredentialsInterface
     private $em;
     private $up;
     private $encoderFactory;
+    /** @var  UserCheckerInterface */
+    private $userChecker;
 
-    public function __construct(EntityManager $entityManager, UserProviderInterface $userProvider, EncoderFactoryInterface $encoderFactory)
+
+    public function __construct(EntityManager $entityManager, UserProviderInterface $userProvider, EncoderFactoryInterface $encoderFactory, UserCheckerInterface $userChecker)
     {
         $this->em = $entityManager;
         $this->up = $userProvider;
         $this->encoderFactory = $encoderFactory;
+        $this->userChecker = $userChecker;
     }
 
     /**
@@ -55,6 +60,8 @@ class UserCredentials implements UserCredentialsInterface
             return false;
         }
 
+        $this->userChecker->checkPreAuth($user);
+
         // Do extra checks if implementing the AdvancedUserInterface
         if ($user instanceof AdvancedUserInterface) {
             if ($user->isAccountNonExpired() === false) return false;
@@ -65,6 +72,7 @@ class UserCredentials implements UserCredentialsInterface
 
         // Check password
         if ($this->encoderFactory->getEncoder($user)->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
+            $this->userChecker->checkPostAuth($user);
             return true;
         }
 

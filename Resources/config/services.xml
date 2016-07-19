@@ -55,6 +55,7 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="oauth2.user_provider"/>
             <argument type="service" id="security.encoder_factory"/>
+            <argument type="service" id="security.user_checker"/>
         </service>
         <service id="oauth2.storage.access_token" class="%oauth2.storage.access_token.class%">
             <argument type="service" id="doctrine.orm.entity_manager"/>
