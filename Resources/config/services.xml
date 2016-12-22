@@ -24,13 +24,13 @@
     <services>
         <service id="oauth2.server" class="%oauth2.server.class%">
             <argument key="oauth2.server.storage" type="collection">
+                <argument type="service" id="oauth2.storage.public_key" />
                 <argument type="service" id="oauth2.storage.client_credentials" />
                 <argument type="service" id="oauth2.storage.access_token" />
                 <argument type="service" id="oauth2.storage.authorization_code" />
                 <argument type="service" id="oauth2.storage.user_credentials" />
                 <argument type="service" id="oauth2.storage.refresh_token" />
                 <argument type="service" id="oauth2.storage.scope" />
-                <argument type="service" id="oauth2.storage.public_key" />
             </argument>
             <argument>%oauth2.server.config%</argument>
         </service>
