@@ -7,13 +7,9 @@ php:
   - 5.6
   - 7.0
 env:
-  global:
   - CONTAINER_CONFIG=Tests/Resources/config/services.xml
-  matrix:
-  - COMPOSER_CMD="composer install"
-  - COMPOSER_CMD="composer update --prefer-lowest"
 before_script:
-  - $(echo $COMPOSER_CMD)
+  - composer install
   - cp phpunit.xml.dist phpunit.xml
   - ln -s Tests/cli-config.php cli-config.php
   - mysql -e 'create database oauth2_server_bundle;'
