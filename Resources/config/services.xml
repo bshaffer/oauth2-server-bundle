@@ -23,7 +23,7 @@
     </parameters>
     <services>
         <service id="oauth2.server" class="%oauth2.server.class%">
-            <argument key="oauth2.server.storage" type="collection">
+            <argument type="collection">
                 <argument type="service" id="oauth2.storage.client_credentials" />
                 <argument type="service" id="oauth2.storage.access_token" />
                 <argument type="service" id="oauth2.storage.authorization_code" />
