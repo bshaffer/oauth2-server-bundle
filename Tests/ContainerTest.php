@@ -15,7 +15,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="oauth2.storage.authorization_code.class">OAuth2\ServerBundle\Storage\OpenID\AuthorizationCode</parameter>
-        
+
         <parameter key="oauth2.server.config" type="collection">
             <parameter key="use_openid_connect">true</parameter>
             <parameter key="issuer">oauth2-server-bundle</parameter>
@@ -46,7 +46,7 @@ EOF;
         $clientManager->createClient(
           $clientId,
           explode(',', $redirectUri),
-          [],
+          array(),
           explode(',', $scope)
         );
 
@@ -67,7 +67,6 @@ EOF;
         parse_str($parts['query'], $query);
         $code = $server->getStorage('authorization_code')->getAuthorizationCode($query['code']);
 
-//      TODO: add it_token in AuthorizationCode::getAuthorizeResponse
-//        $this->assertArrayHasKey('id_token', $code);
+        $this->assertArrayHasKey('id_token', $code);
     }
 }

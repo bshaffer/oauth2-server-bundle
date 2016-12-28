@@ -25,7 +25,7 @@ class AuthorizeControllerTest extends \PHPUnit_Framework_TestCase
         $clientManager->createClient(
           $clientId,
           explode(',', $redirectUri),
-          [],
+          array(),
           explode(',', $scope)
         );
 

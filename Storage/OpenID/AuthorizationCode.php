@@ -33,6 +33,7 @@ class AuthorizationCode implements AuthorizationCodeInterface
      *     "expires"      => EXPIRES,        // REQUIRED Stored expiration in unix timestamp
      *     "redirect_uri" => REDIRECT_URI,   // REQUIRED Stored redirect URI
      *     "scope"        => SCOPE,          // OPTIONAL Stored scope values in space-separated string
+     *     "open_id"      => OPEN_ID,        // OPTIONAL Stored ID Token
      * );
      * @endcode
      *
@@ -54,7 +55,8 @@ class AuthorizationCode implements AuthorizationCodeInterface
             'user_id' => $code->getUserId(),
             'expires' => $code->getExpires()->getTimestamp(),
             'redirect_uri' => implode(' ', $code->getRedirectUri()),
-            'scope' => $code->getScope()
+            'scope' => $code->getScope(),
+            'id_token' => $code->getIdToken(),
         );
     }
 
