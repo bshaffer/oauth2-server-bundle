@@ -14,10 +14,10 @@ class ScopeManagerTest extends \PHPUnit_Framework_TestCase
 
         $manager = new ScopeManager($em);
 
-        $scopes = ['test-scope-'.rand(), 'test-scope-'.rand(), 'test-scope-'.rand()];
+        $scopes = array('test-scope-'.rand(), 'test-scope-'.rand(), 'test-scope-'.rand());
 
         foreach ($scopes as $scope) {
-            $manager->createScope($scope);
+            $manager->createScope($scope, $scope);
         }
 
         $dbScopes = $manager->findScopesByScopes($scopes);
