@@ -59,7 +59,7 @@ class ScopeManager implements ScopeManagerInterface
         $scopeObjects = $this->em->getRepository('OAuth2ServerBundle:Scope')
             ->createQueryBuilder('a')
             ->where('a.scope in (?1)')
-            ->setParameter(1, implode(',', $scopes))
+            ->setParameter(1, $scopes)
             ->getQuery()->getResult();
 
         return $scopeObjects;
