@@ -10,7 +10,7 @@ php:
 env:
   - CONTAINER_CONFIG=Tests/Resources/config/services.xml
 before_script:
-  - composer install
+  - if [[ "$TRAVIS_PHP_VERSION" == "5.3" ]]; then composer update --prefer-lowest; else composer install; fi
   - cp phpunit.xml.dist phpunit.xml
   - ln -s Tests/cli-config.php cli-config.php
   - mysql -e 'create database oauth2_server_bundle;'
