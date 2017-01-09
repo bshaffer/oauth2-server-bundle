@@ -16,10 +16,19 @@ class AuthorizeControllerTest extends \PHPUnit_Framework_TestCase
         $controller = new AuthorizeController();
         $controller->setContainer($container);
 
-        $clientId = 'test-client-' . rand();
+        $clientManager = $container->get('oauth2.client_manager');
 
-        $server = $container->get('oauth2.server');
-        $server->getStorage('client_credentials')->setClientDetails($clientId, 'test-client-secret', 'http://brentertainment.com');
+        $clientId = 'test-client-' . rand();
+        $redirectUri = 'http://brentertainment.com';
+        $scope  = 'openid';
+
+        $clientManager->createClient(
+          $clientId,
+          explode(',', $redirectUri),
+          array(),
+          explode(',', $scope)
+        );
+
         $request = new Request(array(
             'client_id'     => $clientId,
             'response_type' => 'code',
