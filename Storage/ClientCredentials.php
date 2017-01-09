@@ -62,6 +62,8 @@ class ClientCredentials implements ClientCredentialsInterface
      *               "redirect_uri" => REDIRECT_URI,      // REQUIRED redirect_uri registered for the client
      *               "client_id"    => CLIENT_ID,         // OPTIONAL the client id
      *               "grant_types"  => GRANT_TYPES,       // OPTIONAL an array of restricted grant types
+     *               "user_id"      => USER_ID,           // OPTIONAL the user identifier associated with this client
+     *               "scope"        => SCOPE,             // OPTIONAL the scopes allowed for this client
      *               );
      * @endcode
      *
@@ -79,7 +81,9 @@ class ClientCredentials implements ClientCredentialsInterface
         return array(
             'redirect_uri' => implode(' ', $client->getRedirectUri()),
             'client_id' => $client->getClientId(),
-            'grant_types' => $client->getGrantTypes()
+            'grant_types' => $client->getGrantTypes(),
+            'user_id' => null,
+            'scopes' => $client->getScopes(),
         );
     }
 
