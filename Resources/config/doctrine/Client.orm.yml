@@ -18,4 +18,7 @@ OAuth2\ServerBundle\Entity\Client:
         scopes:
             type:       simple_array
             nullable:   true
+        display_image:
+            type:       blob
+            nullable:   true
     lifecycleCallbacks: {  }
