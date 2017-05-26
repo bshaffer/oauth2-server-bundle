@@ -53,7 +53,7 @@ class ClientCredentials implements ClientCredentialsInterface
      * @param $client_id
      * Client identifier to be check with.
      *
-     * @return array
+     * @return array|bool
      *               Client details. The only mandatory key in the array is "redirect_uri".
      *               This function MUST return FALSE if the given client does not exist or is
      *               invalid. "redirect_uri" can be space-delimited to allow for multiple valid uris.
@@ -69,7 +69,7 @@ class ClientCredentials implements ClientCredentialsInterface
      */
     public function getClientDetails($client_id)
     {
-        // Get Client
+        /** @var Client $client */
         $client = $this->em->getRepository('OAuth2ServerBundle:Client')->find($client_id);
 
         if (!$client) {
@@ -79,7 +79,8 @@ class ClientCredentials implements ClientCredentialsInterface
         return array(
             'redirect_uri' => implode(' ', $client->getRedirectUri()),
             'client_id' => $client->getClientId(),
-            'grant_types' => $client->getGrantTypes()
+            'grant_types' => $client->getGrantTypes(),
+            'display_image' => $client->getDisplayImage()
         );
     }
 

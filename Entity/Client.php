@@ -23,19 +23,25 @@ class Client
     private $redirect_uri;
 
     /**
-     * @var \OAuth2\ServerBundle\Entity\ClientPublicKey $public_key
+     * @var array $public_key
      */
     private $grant_types;
 
     /**
-     * @var string
+     * @var ClientPublicKey
      */
     private $public_key;
+
+    /**
+     * @var string
+     */
+    private $display_image;
 
     /**
      * Set client_id
      *
      * @param  string $clientId
+     *
      * @return Client
      */
     public function setClientId($clientId)
@@ -59,6 +65,7 @@ class Client
      * Set client_secret
      *
      * @param  string $clientSecret
+     *
      * @return Client
      */
     public function setClientSecret($clientSecret)
@@ -81,7 +88,8 @@ class Client
     /**
      * Set redirect_uri
      *
-     * @param  array  $redirectUri
+     * @param  array $redirectUri
+     *
      * @return Client
      */
     public function setRedirectUri($redirectUri)
@@ -104,7 +112,8 @@ class Client
     /**
      * Set grant_types
      *
-     * @param  array  $grantTypes
+     * @param  array $grantTypes
+     *
      * @return Client
      */
     public function setGrantTypes($grantTypes)
@@ -123,6 +132,7 @@ class Client
     {
         return $this->grant_types;
     }
+
     /**
      * @var array
      */
@@ -131,7 +141,8 @@ class Client
     /**
      * Set scopes
      *
-     * @param  array  $scopes
+     * @param  array $scopes
+     *
      * @return Client
      */
     public function setScopes($scopes)
@@ -154,10 +165,11 @@ class Client
     /**
      * Set public key
      *
-     * @param  \OAuth2\ServerBundle\Entity\ClientPublicKey $public_key
+     * @param  ClientPublicKey $public_key
+     *
      * @return Client
      */
-    public function setPublicKey(\OAuth2\ServerBundle\Entity\ClientPublicKey $public_key = null)
+    public function setPublicKey(ClientPublicKey $public_key = null)
     {
         $this->public_key = $public_key;
 
@@ -167,10 +179,26 @@ class Client
     /**
      * Get public key
      *
-     * @return \OAuth2\ServerBundle\Entity\ClientPublicKey
+     * @return ClientPublicKey
      */
     public function getPublicKey()
     {
         return $this->public_key;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplayImage()
+    {
+        return $this->display_image;
+    }
+
+    /**
+     * @param mixed $display_image
+     */
+    public function setDisplayImage($display_image)
+    {
+        $this->display_image = $display_image;
     }
 }
