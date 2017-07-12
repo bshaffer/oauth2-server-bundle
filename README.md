@@ -42,7 +42,7 @@ public function tokenAction()
 Use composer to add the requirement and download it by running the command:
 
 ``` bash
-$ php composer.phar require bshaffer/oauth2-server-bundle
+$ composer require bshaffer/oauth2-server-bundle
 ```
 
 Composer will update your composer.json and install the bundle to your project's `vendor/bshaffer` directory.
@@ -69,7 +69,7 @@ public function registerBundles()
 You'll need to update your schema to setup the Entities provided by this module.
 
 ``` bash
-$ php app/console doctrine:schema:update --force
+$ php bin/console doctrine:schema:update --force
 ```
 
 ### Step 4: Add routes
@@ -90,7 +90,7 @@ oauth2_server:
 You'll need to setup a scope before you can create a client, use this command. The description you give here will appear on the Authorization page.
 
 ```sh
-$ php app/console OAuth2:CreateScope scope (description)
+$ php bin/console OAuth2:CreateScope scope (description)
 ```
 
 ### Step 6: Create a client
@@ -98,7 +98,7 @@ $ php app/console OAuth2:CreateScope scope (description)
 Use this console command to create a new client:
 
 ```sh
-$ php app/console OAuth2:CreateClient client_id redirect_uri (grant_types) (scope)
+$ php bin/console OAuth2:CreateClient client_id redirect_uri (grant_types) (scope)
 ```
 
 ## Optional Configuration
@@ -126,7 +126,7 @@ Therefore to make proper use of the user credentials grant type you'll need to m
 # app/config/config.yml
 
 parameters:
-    oauth2.user_provider.class: Amce\OAuth2ServerBundle\User\OAuth2UserProvider
+    oauth2.user_provider.class: OAuth2\ServerBundle\User\OAuth2UserProvider
 ```
 
 If you want to take advantage of scope restriction on a per user basis your User entity will need to implement the `OAuth2\ServerBundle\OAuth2UserInterface` or `OAuth2\ServerBundle\AdvancedOAuth2UserInterface`.
@@ -151,7 +151,7 @@ security:
 You'll need some users first though! Use the console command to create a new user:
 
 ```sh
-$ php app/console OAuth2:CreateUser username password
+$ php bin/console OAuth2:CreateUser username password
 ```
 
 ## Configuring Grant Types
