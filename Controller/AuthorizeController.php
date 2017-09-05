@@ -29,12 +29,13 @@ class AuthorizeController extends Controller
             $scopes[] = $scopeStorage->getDescriptionForScope($scope);
         }
 
+        $request = $this->get('oauth2.request')->query->all();
         $qs = array_intersect_key(
-            $this->get('oauth2.request')->query->all(),
+            $request,
             array_flip(explode(' ', 'response_type client_id redirect_uri scope state nonce'))
         );
 
-        return array('qs' => $qs, 'scopes' => $scopes);
+        return array('qs' => $qs, 'scopes' => $scopes, 'request' => $request);
     }
 
     /**

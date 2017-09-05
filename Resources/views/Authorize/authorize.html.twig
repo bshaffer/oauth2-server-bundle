@@ -1,15 +1,15 @@
 <h1>Authorize</h1>
 
 {% if scopes|length > 0 %}
-<p>{{ request.client_id }} would like to access the following data:</p>
+    <p>{{ qs.client_id }} would like to access the following data:</p>
 
-<ul>
-    {% for scope in scopes %}
-    <li>{{ scope }}</li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for scope in scopes %}
+            <li>{{ scope }}</li>
+        {% endfor %}
+    </ul>
 {% else %}
-<p>{{ request.client_id }} would like to access.</p>
+    <p>{{ qs.client_id }} would like to access.</p>
 {% endif %}
 
 <form action="?{{ qs|url_encode }}" method="post">

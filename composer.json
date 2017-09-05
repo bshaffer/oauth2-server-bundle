@@ -1,9 +1,9 @@
 {
-    "name": "bshaffer/oauth2-server-bundle",
+    "name": "alpha1125/oauth2-server-bundle",
     "type": "symfony-bundle",
     "description": "Symfony OAuth2ServerBundle",
     "keywords": ["oauth", "oauth2", "security"],
-    "homepage": "http://github.com/bshaffer/oauth2-server-bundle",
+    "homepage": "http://github.com/alpha1125/oauth2-server-bundle",
     "license": "MIT",
     "authors": [
         {
